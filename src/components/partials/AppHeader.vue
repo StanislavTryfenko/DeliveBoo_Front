@@ -9,8 +9,8 @@ export default {
 					view_name: 'Home'
 				},
 				{
-					route_name: 'restaurants',
-					view_name: 'Restaurants'
+					route_name: 'restaurant',
+					view_name: 'Restaurant???'
 				},
 				{
 					route_name: 'cart',
@@ -24,7 +24,9 @@ export default {
 
 <template>
 	<div>
-		header
+		<h2>
+			header
+		</h2>
 		<nav>
 			<div class="logo">LOGO</div>
 			<ul>
@@ -32,12 +34,17 @@ export default {
 					<router-link activeClass :to="{ name: route.route_name }">{{ route.view_name }}</router-link>
 				</li>
 				<li>
-					<a href="http://127.0.0.1:8000/">your restaurant</a>
+					<a href="http://127.0.0.1:8000/">your restaurant / back-office</a>
 					<!-- funziona se la porta è corretta (momentaneo) -->
 				</li>
 			</ul>
 		</nav>
 	</div>
+	<hr>
 </template>
 
-<style></style>
+<style scoped>
+a {
+	color: palegreen;
+}
+</style>

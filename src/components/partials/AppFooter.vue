@@ -5,7 +5,12 @@ export default {
 </script>
 
 <template>
-	<div>footer</div>
+	<hr>
+	<h2>footer</h2>
 </template>
 
-<style></style>
+<style scoped>
+div {
+	margin-top: 3rem
+}
+</style>
