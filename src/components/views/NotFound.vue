@@ -11,5 +11,6 @@ export default {
 <style scoped>
 div {
     color: yellow;
+    font-size: 10rem
 }
 </style>
