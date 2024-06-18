@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "./components/views/HomeView.vue";
-import RestaurantsView from "./components/views/RestaurantsView.vue";
+import RestaurantView from "./components/views/RestaurantView.vue";
 import CartView from "./components/views/CartView.vue";
 import NotFound from "./components/views/NotFound.vue";
 
@@ -14,9 +14,9 @@ const router = createRouter({
             component: HomeView
         },
         {
-            path: '/restaurants',
-            name: 'restaurants',
-            component: RestaurantsView
+            path: '/restaurant',
+            name: 'restaurant',
+            component: RestaurantView
         },
         {
             path: '/cart',
