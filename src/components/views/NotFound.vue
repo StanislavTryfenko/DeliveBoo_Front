@@ -1,17 +1,15 @@
 <script>
-    export default {
-        name: 'NotFound'
-    }
+export default {
+    name: "NotFound",
+};
 </script>
-<template>
-    <div>
-            404
-    </div>
-</template>
 
+<template>
+    <div>404</div>
+</template>
 
 <style scoped>
 div {
-    color: yellow
+    color: yellow;
 }
 </style>

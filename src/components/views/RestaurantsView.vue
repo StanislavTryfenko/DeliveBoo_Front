@@ -1,15 +1,11 @@
 <script>
-    export default {
-        name: 'RestaurantsView'
-    }
+export default {
+    name: "RestaurantsView",
+};
 </script>
 
 <template>
-    <div>
-        restaurants
-    </div>
+    <div>restaurants</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
