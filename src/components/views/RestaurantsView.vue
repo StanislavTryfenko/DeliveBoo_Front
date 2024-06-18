@@ -1,6 +1,6 @@
 <script>
     export default {
-        name: 'AppRestaurants'
+        name: 'RestaurantsView'
     }
 </script>
 

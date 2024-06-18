@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'AppHome',
+    name: 'HomeView',
 }
 </script>
 

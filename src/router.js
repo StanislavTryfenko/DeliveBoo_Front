@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import AppHome from "./components/views/AppHome.vue";
-import AppRestaurants from "./components/views/AppRestaurants.vue";
+import HomeView from "./components/views/HomeView.vue";
+import RestaurantsView from "./components/views/RestaurantsView.vue";
+import NotFound from "./components/views/NotFound.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -9,12 +10,17 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: AppHome
+            component: HomeView
         },
         {
             path: '/restaurants',
             name: 'restaurants',
-            component: AppRestaurants
+            component: RestaurantsView
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'NotFound',
+            component: NotFound
         },
     ]
 });
