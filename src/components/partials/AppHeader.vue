@@ -26,7 +26,7 @@ export default {
 					<span class="fs-5 fw-bold">DeliveBoo</span>
 				</div>
 				<div class="col d-flex gap-3 justify-content-end">
-					<router-link v-for="link in menu" :to="{ name: link.route }" id="header_links">
+					<router-link v-for="link in menu" :to="{ name: link.route }">
 						<i :class="link.icon"></i>
 					</router-link>
 					<a href="http://127.0.0.1:8000/" target="_blank"><i class="fa-solid fa-user"></i></a>
