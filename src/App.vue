@@ -19,9 +19,4 @@ export default {
 	<AppFooter />
 </template>
 
-<style>
-body {
-	background-color: steelblue;
-	color: white;
-}
-</style>
+<style></style>
