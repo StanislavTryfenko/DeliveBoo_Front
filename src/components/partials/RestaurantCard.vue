@@ -25,7 +25,7 @@ export default {
 
 <template>
 
-	<router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="no_style">
+	<router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }" class="no_style">
 		<div class="card card_style rounded-1 mb-4">
 			<img v-if="restaurant.cover_image" :src="baseApiUrl + '/storage/' + restaurant.cover_image"
 				:alt="restaurant.name_restaurant" class="card-img-top">

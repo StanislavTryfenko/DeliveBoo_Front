@@ -27,11 +27,11 @@ export default {
                 .get(url)
                 .then(response => {
                     if (response.data.success) {
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.restaurants = response.data.restaurants;
                         this.types = response.data.types;
-                        console.log("ristoranti caricati:", this.restaurants);
-                        console.log("tipologie caricate", this.types);
+                        // console.log("ristoranti caricati:", this.restaurants);
+                        // console.log("tipologie caricate", this.types);
                         this.loading = false;
                     } else {
                         console.log("api not found");
