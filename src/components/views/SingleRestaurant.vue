@@ -18,7 +18,7 @@ export default {
     methods: {
         callApiSingleRestaurant(url) {
             axios.get(url).then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 this.restaurant = response.data.response
                 this.types = response.data.response.types
                 this.dishes = response.data.response.dishes
@@ -64,13 +64,19 @@ export default {
         </div>
     </div>
     <div class="menu">
-        <div class="row d-flex">
-            <div class="col" v-for="n in 8">
-                <div class="card">
-                    <div class="card-title">dish</div>
-                    <div class="actions">
-                        <button>+</button>
-                        <button>-</button>
+        <div class="row d-flex justify-content-between g-4">
+            <div class="col-3" v-for="dish in dishes">
+                <div class="card h-100">
+                    <img class="card-img-top" src="" alt="Title" />
+                    <div class="card-body">
+                        <h4 class="card-title">{{ dish.name }}</h4>
+                        <p class="card-text">{{ dish.description }}</p>
+                        <strong>Prezzo: €</strong><span>{{ dish.price }}</span><br>
+                        <strong>Disponibilità: </strong><span>{{ dish.visible }}</span><br>
+                    </div>
+                    <div class="actions text-center">
+                        <button>Aggiungi</button>
+                        <button>Togli</button>
                     </div>
                 </div>
             </div>
