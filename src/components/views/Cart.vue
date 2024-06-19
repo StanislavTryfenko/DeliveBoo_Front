@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'CartView'
+    name: 'Cart'
 }
 </script>
 

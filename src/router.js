@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import HomeView from "./components/views/HomeView.vue";
-import RestaurantView from "./components/views/RestaurantView.vue";
-import CartView from "./components/views/CartView.vue";
+import AppHome from "./components/views/AppHome.vue";
+import SingleRestaurant from "./components/views/SingleRestaurant.vue";
+import Cart from "./components/views/Cart.vue";
 import NotFound from "./components/views/NotFound.vue";
 
 const router = createRouter({
@@ -11,17 +11,17 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView
+            component: AppHome
         },
         {
-            path: '/restaurant',
+            path: '/restaurant/:slug',
             name: 'restaurant',
-            component: RestaurantView
+            component: SingleRestaurant
         },
         {
             path: '/cart',
             name: 'cart',
-            component: CartView
+            component: Cart
         },
         {
             path: '/:pathMatch(.*)*',

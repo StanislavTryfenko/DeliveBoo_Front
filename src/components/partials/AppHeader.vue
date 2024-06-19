@@ -3,14 +3,14 @@ export default {
 	name: "AppHeader",
 	data() {
 		return {
-			routes: [
+			menu: [
 				{
-					route_name: 'home',
-					view_name: 'Home'
+					route: 'home',
+					icon: 'fa-solid fa-house-chimney'
 				},
 				{
-					route_name: 'cart',
-					view_name: 'Cart'
+					route: 'cart',
+					icon: 'fa-solid fa-cart-shopping'
 				},
 			]
 		}
@@ -19,25 +19,35 @@ export default {
 </script>
 
 <template>
-	<div>
-		<h2>
-			header
-		</h2>
-		<nav>
-			<div class="logo">LOGO</div>
-			<ul>
-				<li :class="route.route_name" v-for="route in routes">
-					<router-link :to="{ name: route.route_name }">{{ route.view_name
-						}}</router-link>
-				</li>
-				<li class="back-office">
-					<a href="http://127.0.0.1:8000/">your restaurant / back-office</a>
-					<!-- funziona se la porta è corretta (momentaneo) -->
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<hr>
+	<header id="my_header">
+		<div class="container">
+			<div class="row justify-content-between align-items-center py-2">
+				<div class="col d-flex justify-content-start">
+					<span class="fs-5 fw-bold">DeliveBoo</span>
+				</div>
+				<div class="col d-flex gap-3 justify-content-end">
+					<router-link v-for="link in menu" :to="{ name: link.route }" id="header_links">
+						<i :class="link.icon"></i>
+					</router-link>
+					<a href="http://127.0.0.1:8000/" target="_blank"><i class="fa-solid fa-user"></i></a>
+				</div>
+			</div>
+
+		</div>
+	</header>
+
 </template>
 
-<style></style>
+<style lang="scss">
+@import '../../assets/scss/variables.scss';
+
+#my_header {
+	background-color: $primary;
+	color: white;
+
+	i {
+		font-size: 1.2rem;
+		color: white;
+	}
+}
+</style>
