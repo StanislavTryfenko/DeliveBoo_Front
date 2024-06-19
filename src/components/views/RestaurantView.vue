@@ -9,25 +9,7 @@ export default {
     <div class="restaurant_info">restaurant infos</div>
     <div class="menu">
         <div class="row d-flex">
-            <div class="col">
-                <div class="card">
-                    <div class="card-title">dish</div>
-                    <div class="actions">
-                        <button>+</button>
-                        <button>-</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-title">dish</div>
-                    <div class="actions">
-                        <button>+</button>
-                        <button>-</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
+            <div class="col" v-for="n in 8">
                 <div class="card">
                     <div class="card-title">dish</div>
                     <div class="actions">
