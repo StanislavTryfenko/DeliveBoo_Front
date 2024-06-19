@@ -40,8 +40,4 @@ export default {
 	<hr>
 </template>
 
-<style scoped>
-a {
-	color: palegreen;
-}
-</style>
+<style></style>
