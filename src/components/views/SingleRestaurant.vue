@@ -57,6 +57,9 @@ export default {
                         <strong>Numero di telefono: </strong><span>{{ restaurant.phone_number }}</span>
                     </li>
                 </ul>
+                <ul class="types d-flex justify-content-evenly p-0">
+                    <li class="badge bg-primary" v-for="type in types">{{ type.name }}</li>
+                </ul>
             </div>
         </div>
     </div>
