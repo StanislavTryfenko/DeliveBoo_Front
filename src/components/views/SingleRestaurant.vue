@@ -18,7 +18,7 @@ export default {
     methods: {
         callApiSingleRestaurant(url) {
             axios.get(url).then(response => {
-                // console.log(response.data)
+                console.log(response.data)
                 this.restaurant = response.data.response
                 this.types = response.data.response.types
                 this.dishes = response.data.response.dishes
@@ -41,19 +41,22 @@ export default {
 <template>
     <div class="restaurant_info d-flex">
         <div class="image m-3">
-            <img src="https://placehold.co/400x300" alt="">
+            cover_image
+            <img v-if="restaurant.cover_image" :src="base_api_url + '/storage/' + restaurant.cover_image"
+                :alt="restaurant.name_restaurant">
+            <img v-else src="https://placehold.co/400x300" alt="">
         </div>
         <div class="info m-3">
             <h2>{{ restaurant.name_restaurant }}</h2>
             <div class="metadata">
                 <ul class="list-group my-3">
-                    <li class="list-group-item" v-if="restaurant.address != null">
+                    <li class="list-group-item" v-if="restaurant.address">
                         <strong>Indirizzo: </strong><span>{{ restaurant.address }}</span>
                     </li>
-                    <li class="list-group-item" v-if="restaurant.contact_email != null">
+                    <li class="list-group-item" v-if="restaurant.contact_email">
                         <strong>E-mail di contatto: </strong><span>{{ restaurant.contact_email }}</span>
                     </li>
-                    <li class="list-group-item" v-if="restaurant.phone_number != null">
+                    <li class="list-group-item" v-if="restaurant.phone_number">
                         <strong>Numero di telefono: </strong><span>{{ restaurant.phone_number }}</span>
                     </li>
                 </ul>
@@ -62,17 +65,34 @@ export default {
                 </ul>
             </div>
         </div>
+        <div class="logo m-3">
+            logo
+            <img v-if="restaurant.logo" :src="base_api_url + '/storage/' + restaurant.logo"
+                :alt="restaurant.name_restaurant">
+            <img v-else src="https://placehold.co/100x100" alt="">
+        </div>
     </div>
-    <div class="menu">
-        <div class="row d-flex justify-content-between g-4">
+    <div class="menu m-3">
+        <div class="row d-flex g-4">
             <div class="col-3" v-for="dish in dishes">
                 <div class="card h-100">
-                    <img class="card-img-top" src="" alt="Title" />
+                    <img v-if="dish.image" :src="base_api_url + '/storage/' + dish.image" :alt="dish.name"
+                        class="card-img-top">
+                    <img v-else src="https://placehold.co/100x100" :alt="dish.name" class="card-img-top">
                     <div class="card-body">
                         <h4 class="card-title">{{ dish.name }}</h4>
                         <p class="card-text">{{ dish.description }}</p>
-                        <strong>Prezzo: €</strong><span>{{ dish.price }}</span><br>
-                        <strong>Disponibilità: </strong><span>{{ dish.visible }}</span><br>
+                        <strong>Prezzo: € </strong>
+                        <span>{{ dish.price }}</span>
+                        <br>
+                        <strong>Disponibilità: </strong>
+                        <template v-if="dish.visible === 1">
+                            <span>✅</span>
+                        </template>
+                        <template v-else>
+                            <span>❌</span>
+                        </template>
+                        <br>
                     </div>
                     <div class="actions text-center">
                         <button>Aggiungi</button>
