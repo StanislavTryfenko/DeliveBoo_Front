@@ -19,13 +19,15 @@ export default {
 	},
 	mounted() {
 		/* console.log('progetto:', this.project); */
+		console.log(this.restaurant);
+		console.log(this.baseApiUrl);
 	}
 }
 </script>
 
 <template>
 	<div class="card card_style rounded-1 mb-4">
-		<img v-if="restaurant.cover_image" :src="baseApiUrl + '/storage/' + restaurant.cover_image"
+		<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
 			:alt="restaurant.name_restaurant" class="card-img-top">
 		<img v-else src="https://placehold.co/200x100" :alt="restaurant.name_restaurant" class="card-img-top">
 		<div class="card-body">
