@@ -26,6 +26,7 @@ export default {
                         console.log(response.data);
                         this.restaurant = response.data.restaurant;
                         this.dishes = this.restaurant.dishes;
+                        console.log("ristorante selezionato:", this.restaurant);
 
                     } else {
                         console.log("api not found");
@@ -40,25 +41,69 @@ export default {
 </script>
 
 <template>
-    <h2>restaurants</h2>
-    <div class="restaurant_info">restaurant infos</div>
-    <div class="container py-4">
-        <div class="row d-flex gap-2">
-            <div class="col-12">
-                <div class="card">
-                    <h5>Piatti disponibili: {{ this.dishes.length }}</h5>
-                </div>
-            </div>
-            <div class="col" v-for="dish in this.restaurant.dishes">
-                <!-- siamo qui -->
-                <div class="card">
-                    <div class="card-title">{{ dish.name }}</div>
-                    <div class="card-body">{{ dish.description }}</div>
+    <div class="container-fluid">
 
+        <div class="row p-3 shadow-lg">
+            <div class="col-12 py-1">
+                <router-link :to="{ name: 'home' }" class="no_style text-secondary px-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    torna indietro
+                </router-link>
+            </div>
+
+            <!-- restaurant dashboard -->
+            <div class="col-12 col-sm-4 py-3">
+                <img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb"
+                    :alt="restaurant.name_restaurant" class="card-img-top my_card_img img-thumbnail">
+                <img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
+                    class="card-img-top img-thumbnail">
+            </div>
+            <div class="col-8 py-3">
+                <h2>{{ restaurant.name_restaurant }}</h2>
+                <ul class="list-inline mb-5">
+                    <li v-for="type in restaurant.types" class="list-inline-item">{{ type.name }}</li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 text-secondary">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span class="fs-5">Informazioni</span>
+                </div>
+                <p calss="fs-3">{{ restaurant.description }}</p>
+            </div>
+        </div>
+
+        <!-- dishes list -->
+        <div class="row p-3 bg-light">
+            <div class="col-12 px-5 py-2">
+                <h4>MENU</h4>
+            </div>
+            <div class="col-12 col-md-6" v-for="dish in restaurant.dishes">
+                <div class="card p-3 m-2">
+                    <div class="row">
+                        <div class="col-6 col-md-9 px-3 py-1">
+                            <h5>
+                                {{ dish.name }}
+                            </h5>
+                            <p class="mb-1">€ {{ dish.price }}</p>
+                            <button class="btn rounded border">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3 align-self-center">
+                            <img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb"
+                                :alt="restaurant.name_restaurant" class="card-img my_card_img">
+                            <img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
+                                class="card-img">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<style></style>
+<style lang="scss">
+.no_style {
+    text-decoration: none;
+    color: inherit;
+}
+</style>
