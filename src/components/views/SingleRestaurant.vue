@@ -77,13 +77,13 @@ export default {
                 <h4>MENU</h4>
             </div>
             <div class="col-12 col-md-6" v-for="dish in restaurant.dishes">
-                <div class="card p-2 m-2">
+                <div class="card p-3 m-2">
                     <div class="row">
-                        <div class="col-6 col-md-9 p-3">
+                        <div class="col-6 col-md-9 px-3 py-1">
                             <h5>
                                 {{ dish.name }}
                             </h5>
-                            <p class="mb-2">€ {{ dish.price }}</p>
+                            <p class="mb-1">€ {{ dish.price }}</p>
                             <button class="btn rounded border">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
