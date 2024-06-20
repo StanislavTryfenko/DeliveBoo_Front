@@ -14,9 +14,9 @@ const router = createRouter({
             component: AppHome
         },
         {
-            path: '/restaurant/:slug',
+            path: '/restaurant/:id/:slug',
             name: 'restaurant',
-            component: SingleRestaurant
+            component: SingleRestaurant,
         },
         {
             path: '/cart',
@@ -27,7 +27,7 @@ const router = createRouter({
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
             component: NotFound
-        },
+        }
     ]
 });
 

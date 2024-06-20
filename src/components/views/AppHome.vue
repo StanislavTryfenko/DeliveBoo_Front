@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import RestaurantCard from '../partials/RestaurantCard.vue';
+import { state } from '../../state';
 
 export default {
     name: "AppHome",
@@ -9,40 +10,43 @@ export default {
     },
     data() {
         return {
+            state,
             loading: true,
             restaurants: [],
             types: [],
             typesList: [],
-            base_api_url: 'http://127.0.0.1:8000',
-            base_restaurants_url: '/api/restaurants',
         }
     },
     mounted() {
-        let url = this.base_api_url + this.base_restaurants_url
-        this.callApi(url);
+        state.callApi();
     },
     methods: {
-        callApi(url) {
-            axios
-                .get(url)
-                .then(response => {
-                    if (response.data.success) {
-                        console.log(response.data);
-                        this.restaurants = response.data.restaurants;
-                        this.types = response.data.types;
-                        console.log("ristoranti caricati:", this.restaurants);
-                        console.log("tipologie caricate", this.types);
-                        this.loading = false;
-                    } else {
-                        console.log("api not found");
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+        callFilters() {
+            const request = {
+                typesList: this.typesList
+            }
+            if (this.typesList.length > 0) {
+                axios
+                    .get(state.base_api + `api/types`, { params: request })
+                    .then((response) => {
+                        state.restaurants = response.data.restaurants;
+                        console.log("risultati della chiamata", response.data.restaurants);
+                        console.log("ristoranti filtrati:", this.restaurants);
+                        console.log("tipologie attive:", this.typesList);
+                    })
+                    .catch((error) => {
+                        console.error("Errore durante la chiamata API:", error);
+                    });
+            } else {
+                console.log("nessun filtro selezionato!");
+            }
+        },
+        resetFilters() {
+            this.typesList = '';
+            state.callApi();
         }
     }
-};
+}
 </script>
 
 <template>
@@ -83,22 +87,36 @@ export default {
                 <!-- filtri -->
                 <div class="row justify-content-center" v-if="types">
                     <div class="col-12 col-md-8 d-flex justify-content-center gap-2 py-2 flex-wrap">
-                        <div class="badge rounded-pill" v-for="type in types" id="my_filters">
-                            <label :for="'type-' + type.id" class="d-flex align-items-center">
-                                <input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox" type="checkbox"
-                                    :value="type.id" :id="'type-' + type.id" v-model="typesList" />
-                                {{ type.name }}
-                            </label>
-                        </div>
+                        <form @submit.prevent="callFilters" method="get">
+                            <div class="badge rounded-pill" v-for="type in state.types"
+                                :class="{ 'active_filter': typesList.includes(type.id) }" id="my_filters">
+
+
+                                <label :for="'type-' + type.id" class="d-flex align-items-center">
+                                    <input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox" type="checkbox"
+                                        :value="type.id" :id="'type-' + type.id" v-model="typesList"
+                                        :class="{ 'active_filter': typesList.includes(type.id) }" />
+                                    {{ type.name }}
+                                </label>
+
+
+                            </div>
+                            <button type="submit">conferma filtri</button>
+                            <button @click="resetFilters">resetta filtri</button>
+                        </form>
                     </div>
                 </div>
 
                 <!-- ristoranti -->
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 py-3" v-if="restaurants">
-                    <div class="col" v-for="restaurant in restaurants.data">
-                        <RestaurantCard :restaurant="restaurant" :baseApiUrl="base_api_url" />
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 py-3">
+                    <div class="col" v-for="restaurant in state.restaurants.data">
+                        <router-link :to="{ name: 'restaurant', params: { id: restaurant.id, slug: restaurant.slug } }"
+                            class="no_style">
+                            <RestaurantCard :restaurant="restaurant" :baseApiUrl="state.base_api" />
+                        </router-link>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -164,5 +182,11 @@ export default {
     opacity: 0;
     width: 0;
     height: 0;
+} */
+
+//mentre un checkbox è attivo, applica questa classe:
+/* .active_filter {
+    background-color: $primary;
+    color: white;
 } */
 </style>
