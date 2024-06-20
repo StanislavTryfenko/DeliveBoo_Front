@@ -30,7 +30,7 @@ export default {
                     .get(state.base_api + `api/types`, { params: request })
                     .then((response) => {
                         state.restaurants = response.data.restaurants;
-                        //console.log("risultati della chiamata", response.data.restaurants);
+                        console.log("risultati della chiamata", response.data.restaurants);
                         //console.log("ristoranti filtrati:", this.restaurants);
                         //console.log("tipologie attive:", this.typesList);
                     })
@@ -97,14 +97,12 @@ export default {
                             <div class="badge rounded-pill" v-for="type in state.types"
                                 :class="{ 'active_filter': typesList.includes(type.id) }" id="my_filters">
 
-
                                 <label :for="'type-' + type.id" class="d-flex align-items-center">
                                     <input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters" type="checkbox"
                                         :value="type.id" :id="'type-' + type.id" v-model="typesList"
                                         :class="{ 'active_filter': typesList.includes(type.id) }" />
                                     {{ type.name }}
                                 </label>
-
 
                             </div>
                             <button type="submit">conferma filtri</button>
