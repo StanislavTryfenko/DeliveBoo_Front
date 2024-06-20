@@ -23,7 +23,10 @@ export default {
 		<div class="container">
 			<div class="row justify-content-between align-items-center py-2">
 				<div class="col d-flex justify-content-start">
-					<span class="fs-5 fw-bold">DeliveBoo</span>
+					<router-link :to="{ name: 'home' }" class="no_style">
+						<span class="fs-5 fw-bold">DeliveBoo</span>
+					</router-link>
+
 				</div>
 				<div class="col d-flex gap-3 justify-content-end">
 					<router-link v-for="link in menu" :to="{ name: link.route }">
@@ -49,5 +52,10 @@ export default {
 		font-size: 1.2rem;
 		color: white;
 	}
+}
+
+.no_style {
+	text-decoration: none;
+	color: inherit;
 }
 </style>
