@@ -25,8 +25,8 @@ export default {
 
 <template>
 	<div class="card card_style rounded-1 mb-4">
-		<img v-if="restaurant.cover_image" :src="baseApiUrl + '/storage/' + restaurant.cover_image"
-			:alt="restaurant.name_restaurant" class="card-img-top">
+		<img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb" :alt="restaurant.name_restaurant"
+			class="card-img-top my_card_img">
 		<img v-else src="https://placehold.co/200x100" :alt="restaurant.name_restaurant" class="card-img-top">
 		<div class="card-body">
 			<h4 class="card-title">{{ restaurant.name_restaurant }}</h4>
@@ -41,5 +41,13 @@ export default {
 .no_style {
 	text-decoration: none;
 	color: inherit;
+}
+
+.my_card_img {
+
+	img {
+		width: 100%;
+		height: auto;
+	}
 }
 </style>
