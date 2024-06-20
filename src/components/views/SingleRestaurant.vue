@@ -52,7 +52,7 @@ export default {
             </div>
 
             <!-- restaurant dashboard -->
-            <div class="col-4 py-3">
+            <div class="col-12 col-sm-4 py-3">
                 <img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb"
                     :alt="restaurant.name_restaurant" class="card-img-top my_card_img img-thumbnail">
                 <img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
@@ -67,7 +67,6 @@ export default {
                     <i class="fa-solid fa-circle-info"></i>
                     <span class="fs-5">Informazioni</span>
                 </div>
-
                 <p calss="fs-3">{{ restaurant.description }}</p>
             </div>
         </div>
@@ -77,26 +76,25 @@ export default {
             <div class="col-12 px-5 py-2">
                 <h4>MENU</h4>
             </div>
-            <div class="col-6" v-for="dish in restaurant.dishes">
+            <div class="col-12 col-md-6" v-for="dish in restaurant.dishes">
                 <div class="card p-2 m-2">
                     <div class="row">
-                        <div class="col-8 px-3 py-2">
-                            <h5 class="">
+                        <div class="col-6 col-md-9 p-3">
+                            <h5>
                                 {{ dish.name }}
                             </h5>
-                            <p>€ {{ dish.price }}</p>
+                            <p class="mb-2">€ {{ dish.price }}</p>
+                            <button class="btn rounded border">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
                         </div>
-                        <div class="col-2">
+                        <div class="col-6 col-md-3 align-self-center">
                             <img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb"
-                                :alt="restaurant.name_restaurant" class="card-img-top my_card_img">
+                                :alt="restaurant.name_restaurant" class="card-img my_card_img">
                             <img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
-                                class="card-img-top">
-                        </div>
-                        <div class="col-1 border d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-plus"></i>
+                                class="card-img">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
