@@ -43,6 +43,9 @@ export default {
 				<span v-for="type in restaurant['types']" class="badge bg-primary rounded-pill">
 					{{ type.name }}
 				</span>
+				<span v-for="type in restaurant.types" class="badge bg-primary rounded-pill">
+					{{ type.type_name }}
+				</span>
 			</div>
 
 		</div>
