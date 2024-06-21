@@ -31,8 +31,8 @@ export default {
                     .then((response) => {
                         state.restaurants = response.data.restaurants;
                         console.log("risultati della chiamata", response.data.restaurants);
-                        //console.log("ristoranti filtrati:", this.restaurants);
-                        //console.log("tipologie attive:", this.typesList);
+                        console.log("ristoranti filtrati:", this.restaurants);
+                        console.log("tipologie attive:", this.typesList);
                     })
                     .catch((error) => {
                         console.error("Errore durante la chiamata API:", error);
@@ -92,21 +92,23 @@ export default {
 
                 <!-- filtri -->
                 <div class="row justify-content-center" v-if="types">
-                    <div class="col-12 col-md-8 d-flex justify-content-center gap-2 py-2 flex-wrap">
+                    <div class="col-12 col-md-8 d-flex justify-content-center py-2 flex-wrap">
                         <form @submit.prevent="callFilters" method="get">
-                            <div class="badge rounded-pill" v-for="type in state.types"
+                            <div class="badge rounded-pill m-1" v-for="type in state.types"
                                 :class="{ 'active_filter': typesList.includes(type.id) }" id="my_filters">
 
-                                <label :for="'type-' + type.id" class="d-flex align-items-center">
-                                    <input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters" type="checkbox"
-                                        :value="type.id" :id="'type-' + type.id" v-model="typesList"
-                                        :class="{ 'active_filter': typesList.includes(type.id) }" />
+                                <label :for="'type-' + type.id" class="d-flex align-items-center m-1"
+                                    :class="{ 'active_filter': typesList.includes(type.id) }">
+                                    <input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters"
+                                        type="checkbox" :value="type.id" :id="'type-' + type.id" v-model="typesList" />
                                     {{ type.name }}
                                 </label>
-
                             </div>
-                            <button type="submit">conferma filtri</button>
-                            <button @click="resetFilters">resetta filtri</button>
+                            <div class="col-12 py-2 d-flex gap-2 justify-content-center" id="filter_buttons">
+                                <button type="submit" class="btn rounded border-2">conferma filtri</button>
+                                <button @click="resetFilters" class="btn rounded border-2">resetta filtri</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -181,16 +183,23 @@ export default {
     color: $primary;
 }
 
-/* .hidden-checkbox {
+#filter_buttons {
+    button {
+        border-color: $primary;
+        color: $primary;
+    }
+}
+
+.hidden-checkbox {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
-} */
+}
 
 //mentre un checkbox è attivo, applica questa classe:
-/* .active_filter {
+.active_filter {
     background-color: $primary;
     color: white;
-} */
+}
 </style>
