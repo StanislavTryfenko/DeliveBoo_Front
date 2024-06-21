@@ -9,7 +9,8 @@ export default {
             state,
             dishes: [],
             restaurant: '',
-            single_restaurant_api: 'api/restaurant'
+            single_restaurant_api: 'api/restaurant',
+            baseApiUrl: 'http://127.0.0.1:8000/'
         }
     },
     mounted() {
@@ -53,7 +54,7 @@ export default {
 
             <!-- restaurant dashboard -->
             <div class="col-12 col-sm-4 py-3">
-                <img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb"
+                <img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
                     :alt="restaurant.name_restaurant" class="card-img-top my_card_img img-thumbnail">
                 <img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
                     class="card-img-top img-thumbnail">
@@ -88,8 +89,9 @@ export default {
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
+
                         <div class="col-6 col-md-3 align-self-center">
-                            <img v-if="restaurant.thumb" :src="baseApiUrl + '/uploads/' + restaurant.thumb"
+                            <img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
                                 :alt="restaurant.name_restaurant" class="card-img my_card_img">
                             <img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
                                 class="card-img">
