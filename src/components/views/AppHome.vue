@@ -83,36 +83,41 @@ export default {
         <div class="container-fluid text-center h-100 py-5">
             <div class="row h-100 justify-content-center align-items-end">
                 <div class="col-6 col-md-8 d-flex justify-content-center" id="search_card">
-                    <div class="card align-items-center py-5 mb-4 rounded-5 gap-2 shadow-lg">
-                        <!-- caption -->
-                        <h1>Tutto il gusto che ami, a casa tua</h1>
-                        <p class="fs-4 lh-sm d-none d-sm-block">
-                            Gusta la qualità del tuo ristorante preferito, senza lasciare il comfort di casa
-                        </p>
-                        <!-- search bar -->
-                        <div class="col d-flex justify-content-between border rounded-pill p-1 shadow-sm mb-2">
-                            <div class="px-2 d-flex align-items-center" id="search_bar">
-                                <i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
-                                <span>
-                                    <input type="text" name="types.name" id="types.name" placeholder="cerca categoria"
-                                        class="border-0 py-3 px-2" v-model="searchQuery">
-                                </span>
+
+                    <!-- 
+                        <div class="card align-items-center py-5 mb-4 rounded-5 gap-2 shadow-lg">
+                            caption 
+                            <h1>Tutto il gusto che ami, a casa tua</h1>
+                            <p class="fs-4 lh-sm d-none d-sm-block">
+                                Gusta la qualità del tuo ristorante preferito, senza lasciare il comfort di casa
+                            </p>
+
+                            search bar
+                            <div class="col d-flex justify-content-between border rounded-pill p-1 shadow-sm mb-2">
+                                <div class="px-2 d-flex align-items-center" id="search_bar">
+                                    <i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
+                                    <span>
+                                        <input type="text" name="types.name" id="types.name" placeholder="Cerca Categoria"
+                                            class="border-0 py-3 px-2" v-model="searchQuery">
+                                    </span>
+                                </div>
+                                <button type="submit" class="rounded-pill fw-bold border-0 px-4" @click="addType">
+                                    cerca
+                                </button>
+
+                                computed results
+                                <div v-if="filteredTypes.length > 0" class="position-absolute w-50 bg-white shadow-sm rounded mt-5" style="z-index: 1000;">
+                                    <ul class="list-unstyled m-0 p-4">
+                                        <li v-for="type in filteredTypes" :key="type.id" @click="addType(type)"
+                                            class="p-2 border-bottom" style="cursor: pointer;">
+                                            {{ type.name }}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <button type="submit" class="rounded-pill fw-bold border-0 px-4" @click="addType">
-                                cerca
-                            </button>
-                            <!-- computed results -->
-                            <!-- <div v-if="filteredTypes.length > 0"
-                                class="position-absolute w-50 bg-white shadow-sm rounded mt-5" style="z-index: 1000;">
-                                <ul class="list-unstyled m-0 p-4">
-                                    <li v-for="type in filteredTypes" :key="type.id" @click="addType(type)"
-                                        class="p-2 border-bottom" style="cursor: pointer;">
-                                        {{ type.name }}
-                                    </li>
-                                </ul>
-                            </div> -->
-                        </div>
-                    </div>
+                        </div> 
+                    -->
+
                 </div>
             </div>
         </div>
@@ -139,8 +144,8 @@ export default {
                                 </label>
                             </div>
                             <div class="col-12 py-2 d-flex gap-2 justify-content-center" id="filter_buttons">
-                                <button type="submit" class="btn rounded border-2">conferma filtri</button>
-                                <button @click="resetFilters" class="btn rounded border-2">resetta filtri</button>
+                                <button type="submit" class="btn rounded border-2">Conferma filtri</button>
+                                <button @click="resetFilters" class="btn rounded border-2"> Ripristina filtri</button>
                             </div>
 
                         </form>

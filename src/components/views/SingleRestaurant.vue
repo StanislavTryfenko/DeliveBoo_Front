@@ -48,7 +48,7 @@ export default {
             <div class="col-12 py-1">
                 <router-link :to="{ name: 'home' }" class="no_style text-secondary px-1">
                     <i class="fa-solid fa-arrow-left"></i>
-                    torna indietro
+                    Torna Indietro
                 </router-link>
             </div>
 
@@ -62,13 +62,18 @@ export default {
             <div class="col-8 py-3">
                 <h2>{{ restaurant.name_restaurant }}</h2>
                 <ul class="list-inline mb-5">
-                    <li v-for="type in restaurant.types" class="list-inline-item">{{ type.name }}</li>
+                    <li v-for="type in restaurant.types" class="list-inline-item">{{ type.name }};</li>
                 </ul>
                 <div class="d-flex align-items-center gap-2 text-secondary">
                     <i class="fa-solid fa-circle-info"></i>
                     <span class="fs-5">Informazioni</span>
                 </div>
-                <p calss="fs-3">{{ restaurant.description }}</p>
+                <p class="fs-3">{{ restaurant.description }}</p>
+
+                <p><i class="fa-solid fa-phone"></i> {{ restaurant.phone_number }}</p>
+                <p><i class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
+                <p><i class="fa-solid fa-envelope"></i> {{ restaurant.contact_email }}</p>
+
             </div>
         </div>
 
@@ -85,6 +90,8 @@ export default {
                                 {{ dish.name }}
                             </h5>
                             <p class="mb-1">€ {{ dish.price }}</p>
+                            <p class="mb-1"> {{ dish.description }}</p>
+                            <br>
                             <button class="btn rounded border">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
