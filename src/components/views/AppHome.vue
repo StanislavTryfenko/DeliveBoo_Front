@@ -61,6 +61,7 @@ export default {
                     this.typesList.push(type.id);
                 }
                 this.searchQuery = '';
+                this.callFilters();
             }
         }
     },
