@@ -15,6 +15,7 @@ export default {
             restaurants: [],
             types: [],
             typesList: [],
+            searchQuery: ''
         }
     },
     mounted() {
@@ -31,7 +32,7 @@ export default {
                     .then((response) => {
                         state.restaurants = response.data.restaurants;
                         console.log("risultati della chiamata", response.data.restaurants);
-                        console.log("ristoranti filtrati:", this.restaurants);
+                        /* console.log("ristoranti filtrati:", this.restaurants); */
                         console.log("tipologie attive:", this.typesList);
                     })
                     .catch((error) => {
@@ -50,8 +51,28 @@ export default {
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].checked = false;
             }
+        },
+        /* search bar */
+        addType() {
+            const typeName = this.searchQuery.trim().toLowerCase();
+            if (typeName) {
+                const type = state.types.find(t => t.name.toLowerCase() === typeName);
+                if (type && !this.typesList.includes(type.id)) {
+                    this.typesList.push(type.id);
+                }
+                this.searchQuery = '';
+            }
         }
-    }
+    },
+    /* computed: {
+        filteredTypes() {
+            const query = this.searchQuery.trim().toLowerCase();
+            if (query) {
+                return state.types.filter(type => type.name.toLowerCase().includes(query));
+            }
+            return [];
+        }
+    } */
 }
 </script>
 
@@ -72,11 +93,23 @@ export default {
                             <div class="px-2 d-flex align-items-center" id="search_bar">
                                 <i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
                                 <span>
-                                    <input type="text" name="restaurant_name" id="restaurant_name"
-                                        placeholder="cerca categoria" class="border-0 py-3 px-2">
+                                    <input type="text" name="types.name" id="types.name" placeholder="cerca categoria"
+                                        class="border-0 py-3 px-2" v-model="searchQuery">
                                 </span>
                             </div>
-                            <button type="submit" class="rounded-pill fw-bold border-0 px-4">cerca</button>
+                            <button type="submit" class="rounded-pill fw-bold border-0 px-4" @click="addType">
+                                cerca
+                            </button>
+                            <!-- computed results -->
+                            <!-- <div v-if="filteredTypes.length > 0"
+                                class="position-absolute w-50 bg-white shadow-sm rounded mt-5" style="z-index: 1000;">
+                                <ul class="list-unstyled m-0 p-4">
+                                    <li v-for="type in filteredTypes" :key="type.id" @click="addType(type)"
+                                        class="p-2 border-bottom" style="cursor: pointer;">
+                                        {{ type.name }}
+                                    </li>
+                                </ul>
+                            </div> -->
                         </div>
                     </div>
                 </div>
