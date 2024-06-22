@@ -39,7 +39,7 @@ export default {
                         console.error("Errore durante la chiamata API:", error);
                     });
             } else {
-                resetFilters();
+                console.log("nessun filtro selezionato!");
             }
         },
         resetFilters() {
