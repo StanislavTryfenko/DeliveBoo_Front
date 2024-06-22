@@ -4,6 +4,8 @@ import AppHome from "./components/views/AppHome.vue";
 import SingleRestaurant from "./components/views/SingleRestaurant.vue";
 import Cart from "./components/views/Cart.vue";
 import NotFound from "./components/views/NotFound.vue";
+import SingleRestaurantNotFound from "./components/views/SingleRestaurantNotFound.vue";
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -27,6 +29,11 @@ const router = createRouter({
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
             component: NotFound
+        },
+        {
+            path: "/:pathMatch(.*)*",
+            name: 'not-found',
+            component: SingleRestaurantNotFound
         }
     ]
 });
