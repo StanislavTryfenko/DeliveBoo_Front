@@ -132,7 +132,7 @@ export default {
                 <!-- filtri -->
                 <div class="row justify-content-center" v-if="types">
                     <div class="col-12 col-md-8 d-flex justify-content-center py-2 flex-wrap">
-                        <form @submit.prevent="callFilters" method="get">
+                        <form @click="callFilters" method="get">
                             <div class="badge rounded-pill m-1" v-for="type in state.types"
                                 :class="{ 'active_filter': typesList.includes(type.id) }" id="my_filters">
 
@@ -144,7 +144,7 @@ export default {
                                 </label>
                             </div>
                             <div class="col-12 py-2 d-flex gap-2 justify-content-center" id="filter_buttons">
-                                <button type="submit" class="btn rounded border-2">Conferma filtri</button>
+                                <!-- <button type="submit" class="btn rounded border-2">Conferma filtri</button> -->
                                 <button @click="resetFilters" class="btn rounded border-2"> Ripristina filtri</button>
                             </div>
 
