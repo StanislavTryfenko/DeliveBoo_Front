@@ -144,7 +144,7 @@ export default {
                                 </label>
                             </div>
                             <div class="col-12 py-2 d-flex gap-2 justify-content-center" id="filter_buttons">
-                                <!-- <button type="submit" class="btn rounded border-2">Conferma filtri</button> -->
+                                <button type="submit" class="btn rounded border-2">Conferma filtri</button>
                                 <button @click="resetFilters" class="btn rounded border-2"> Ripristina filtri</button>
                             </div>
 
