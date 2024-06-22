@@ -31,9 +31,9 @@ export default {
                     .get(state.base_api + `api/types`, { params: request })
                     .then((response) => {
                         state.restaurants = response.data.restaurants;
-                        console.log("risultati della chiamata", response.data.restaurants);
-                        /* console.log("ristoranti filtrati:", this.restaurants); */
-                        console.log("tipologie attive:", this.typesList);
+                        // console.log("risultati della chiamata", response.data.restaurants);
+                        // console.log("ristoranti filtrati:", this.restaurants); 
+                        // console.log("tipologie attive:", this.typesList);
                     })
                     .catch((error) => {
                         console.error("Errore durante la chiamata API:", error);
@@ -171,7 +171,7 @@ export default {
 @import '../../assets/scss/variables.scss';
 
 #my_jumbotron {
-    height: 700px;
+    height: 300px;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("src/assets/img/jumbo-food-2.jpg");
