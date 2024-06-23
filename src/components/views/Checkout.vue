@@ -1,15 +1,8 @@
 <template>
-
-    <div>
-        Stai acquistando il prodotto con id:
-    </div>
-
     <template v-if="initialToken !== ''">
         <Payment :authorization="initialToken"></Payment>
     </template>
     <div v-else>loading...</div>
-
-
 </template>
 
 <script>
