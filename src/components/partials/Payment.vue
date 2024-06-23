@@ -66,9 +66,10 @@ export default {
                     }
                     this.form.token = payload.nonce;
                     this.form.order = [
-                        { id: 1, quantity: 2 },
+                        { id: 10, quantity: 2 },
                         { id: 2, quantity: 5 },
-                        { id: 10, quantity: 1 }
+                        { id: 8, quantity: 1 },
+                        
                     ]; //qui sto costruendu un array di prova, ma ovviamente deve essere sostituito ogni volta
                     console.log('Payment Method Nonce:', payload.nonce, this.form);
                     axios.post('http://127.0.0.1:8000/api/orders/make/payment', this.form)
@@ -76,13 +77,14 @@ export default {
                             console.log(response);
                         })
                         .catch((error) => {
-                            if (error.message === 'Request failed with status code 422') {
+                            /*if (error.message === 'Request failed with status code 422') {
                                 this.error = 'Hai sbagliato a compilare il form per l\'invio';
                             } else {
                                 console.log(error.response.data.message)
                                 this.error = error.response.data.message;
                                 
-                            }
+                            }*/
+                           console.log(error)
 
                         });
                 });
