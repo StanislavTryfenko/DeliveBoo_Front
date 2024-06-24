@@ -1,6 +1,11 @@
 <script>
+import ShoppingCart from './ShoppingCart.vue'
+
 export default {
 	name: "AppHeader",
+	components: {
+		ShoppingCart
+	},
 	data() {
 		return {
 			menu: [
@@ -28,10 +33,16 @@ export default {
 					</router-link>
 
 				</div>
-				<div class="col d-flex gap-3 justify-content-end">
-					<router-link v-for="link in menu" :to="{ name: link.route }">
+				<div class="col d-flex gap-3 justify-content-end align-items-center">
+					<!-- <router-link v-for="link in menu" :to="{ name: link.route }">
 						<i :class="link.icon"></i>
-					</router-link>
+					</router-link> -->
+					<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#my_offcanvas"
+						aria-controls="my_offcanvas">
+						<i class="fa-solid fa-cart-shopping">
+							<ShoppingCart />
+						</i>
+					</button>
 					<a href="http://127.0.0.1:8000/" target="_blank"><i class="fa-solid fa-user"></i></a>
 				</div>
 			</div>
