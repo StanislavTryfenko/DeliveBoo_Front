@@ -11,6 +11,7 @@ const initialState = {
 	items: []
 };
 
+
 export const state = reactive(initialState);
 
 /* carica local storage all'avvio */
@@ -45,6 +46,8 @@ state.callApi = function () {
 			this.typesList = response.data.typesList;
 			saveToLocalStorage();
 			this.loading = false;
+
+			/* console.log("types caricati:", this.types); */
 		})
 		.catch(err => {
 			console.log(err);
