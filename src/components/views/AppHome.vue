@@ -18,9 +18,6 @@ export default {
             searchQuery: ''
         }
     },
-    mounted() {
-        state.callApi();
-    },
     methods: {
         callFilters() {
             const request = {
@@ -28,43 +25,46 @@ export default {
             }
             if (this.typesList.length > 0) {
                 axios
-                    .get(state.base_api + `api/types`, { params: request })
-                    .then((response) => {
-                        state.restaurants = response.data.restaurants;
-                        // console.log("risultati della chiamata", response.data.restaurants);
-                        // console.log("ristoranti filtrati:", this.restaurants); 
-                        // console.log("tipologie attive:", this.typesList);
+                .get(state.base_api + `api/types`, { params: request })
+                .then((response) => {
+                    state.restaurants = response.data.restaurants;
+                    console.log("risultati della chiamata", response.data.restaurants);
+                    console.log("ristoranti filtrati:", this.restaurants); 
+                    console.log("tipologie attive:", this.typesList);
                     })
                     .catch((error) => {
                         console.error("Errore durante la chiamata API:", error);
                     });
-            } else {
-                resetFilters();
-            }
-        },
-        resetFilters() {
-            //console.log(this.typesList)
-            this.typesList = [];
-            state.callApi();
-            let inputs = document.getElementsByClassName('managing-filters');
-            //console.log(inputs)
-            for (let i = 0; i < inputs.length; i++) {
-                inputs[i].checked = false;
-            }
-        },
-        /* search bar */
-        addType() {
-            const typeName = this.searchQuery.trim().toLowerCase();
-            if (typeName) {
-                const type = state.types.find(t => t.name.toLowerCase() === typeName);
-                if (type && !this.typesList.includes(type.id)) {
-                    this.typesList.push(type.id);
+                } else {
+                    resetFilters();
                 }
-                this.searchQuery = '';
-                this.callFilters();
+            },
+            resetFilters() {
+                //console.log(this.typesList)
+                this.typesList = [];
+                state.callApi();
+                let inputs = document.getElementsByClassName('managing-filters');
+                //console.log(inputs)
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].checked = false;
+                }
+            },
+            /* search bar */
+            addType() {
+                const typeName = this.searchQuery.trim().toLowerCase();
+                if (typeName) {
+                    const type = state.types.find(t => t.name.toLowerCase() === typeName);
+                    if (type && !this.typesList.includes(type.id)) {
+                        this.typesList.push(type.id);
+                    }
+                    this.searchQuery = '';
+                    this.callFilters();
+                }
             }
-        }
-    },
+        },
+        mounted() {
+            state.callApi();
+        },
     /* computed: {
         filteredTypes() {
             const query = this.searchQuery.trim().toLowerCase();
@@ -73,8 +73,8 @@ export default {
             }
             return [];
         }
-    } */
-}
+    }*/
+} 
 </script>
 
 <template>
@@ -133,7 +133,7 @@ export default {
                 <div class="row justify-content-center" v-if="types">
                     <div class="col-12 col-md-8 d-flex justify-content-center py-2 flex-wrap">
                         <form @click="callFilters" method="get">
-                            <div class="badge rounded-pill m-1" v-for="type in state.types"
+                            <div class="badge rounded-pill m-1" v-for="type in state.typesList"
                                 :class="{ 'active_filter': typesList.includes(type.id) }" id="my_filters">
 
                                 <label :for="'type-' + type.id" class="d-flex align-items-center m-1"

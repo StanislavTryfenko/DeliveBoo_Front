@@ -11,6 +11,7 @@ const initialState = {
 	items: []
 };
 
+
 export const state = reactive(initialState);
 
 /* carica local storage all'avvio */
