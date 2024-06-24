@@ -30,7 +30,7 @@ export default {
                         console.log("ristorante selezionato:", this.restaurant);
 
                     } else {
-                        console.log("api not found");
+                        this.$router.push({ name: 'not-found' })
                     }
                 })
                 .catch(err => {

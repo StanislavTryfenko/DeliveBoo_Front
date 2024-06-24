@@ -31,15 +31,15 @@ export default {
                     .get(state.base_api + `api/types`, { params: request })
                     .then((response) => {
                         state.restaurants = response.data.restaurants;
-                        console.log("risultati della chiamata", response.data.restaurants);
-                        /* console.log("ristoranti filtrati:", this.restaurants); */
-                        console.log("tipologie attive:", this.typesList);
+                        // console.log("risultati della chiamata", response.data.restaurants);
+                        // console.log("ristoranti filtrati:", this.restaurants); 
+                        // console.log("tipologie attive:", this.typesList);
                     })
                     .catch((error) => {
                         console.error("Errore durante la chiamata API:", error);
                     });
             } else {
-                console.log("nessun filtro selezionato!");
+                resetFilters();
             }
         },
         resetFilters() {
@@ -132,7 +132,7 @@ export default {
                 <!-- filtri -->
                 <div class="row justify-content-center" v-if="types">
                     <div class="col-12 col-md-8 d-flex justify-content-center py-2 flex-wrap">
-                        <form @submit.prevent="callFilters" method="get">
+                        <form @click="callFilters" method="get">
                             <div class="badge rounded-pill m-1" v-for="type in state.types"
                                 :class="{ 'active_filter': typesList.includes(type.id) }" id="my_filters">
 
@@ -144,7 +144,7 @@ export default {
                                 </label>
                             </div>
                             <div class="col-12 py-2 d-flex gap-2 justify-content-center" id="filter_buttons">
-                                <button type="submit" class="btn rounded border-2">Conferma filtri</button>
+                                <!-- <button type="submit" class="btn rounded border-2">Conferma filtri</button> -->
                                 <button @click="resetFilters" class="btn rounded border-2"> Ripristina filtri</button>
                             </div>
 
@@ -171,7 +171,7 @@ export default {
 @import '../../assets/scss/variables.scss';
 
 #my_jumbotron {
-    height: 700px;
+    height: 300px;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("src/assets/img/jumbo-food-2.jpg");
