@@ -46,6 +46,8 @@ state.callApi = function () {
 			this.typesList = response.data.typesList;
 			saveToLocalStorage();
 			this.loading = false;
+
+			/* console.log("types caricati:", this.types); */
 		})
 		.catch(err => {
 			console.log(err);
