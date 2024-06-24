@@ -20,6 +20,7 @@
 import dropin from 'braintree-web-drop-in';
 import axios from 'axios';
 import { state } from '../../state';
+import router from '../../router';
 
 export default {
 	data() {
@@ -90,6 +91,7 @@ export default {
 						.then((response) => {
 							this.clearCart();
 							console.log(response);
+							this.$router.push({ name: 'checkout_success' })
 						})
 						.catch((error) => {
 							if (error.message === 'Request failed with status code 422') {
