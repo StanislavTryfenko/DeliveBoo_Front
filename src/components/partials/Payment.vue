@@ -1,22 +1,3 @@
-
-<template>
-	<div class="d-flex align-items-center flex-column p-3">
-		<div v-if="error" class="text-danger fs-3 mb-3">{{ error }}</div>
-		<h1 class="mb-4">Braintree Drop-in</h1>
-		<form @submit.prevent="onSubmit">
-			<input type="text" v-model="form.customerName" placeholder="First Name" required />
-			<input type="text" v-model="form.customerLastName" placeholder="Last Name" required />
-			<input type="email" v-model="form.customerEmail" placeholder="Email" required />
-			<input type="tel" v-model="form.customerPhoneNumber" placeholder="Phone Number" required />
-			<input type="text" v-model="form.customerAddress" placeholder="Address" required />
-			<div id="dropin-container"></div>
-			<button type="submit" @click="submitPayment" class="btn btn-primary">Pay</button>
-		</form>
-		<!-- <div id="dropin-container" class="w-50 mb-4"></div>
-        <button @click="submitPayment" class="btn btn-primary">Submit Payment</button> -->
-	</div>
-</template>
-
 <script>
 import dropin from 'braintree-web-drop-in';
 import axios from 'axios';
@@ -63,9 +44,9 @@ export default {
 			})
 		},
 		submitPayment() {
-    if (this.valData()) {
+    /* if (this.valData()) {
                 //blocco qua
-            }
+            } */
 			if (this.instance) {
 				this.instance.requestPaymentMethod((error, payload) => {
 					if (error) {
@@ -133,7 +114,7 @@ export default {
                 }
             });
 
-            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.form.customerEmail)) {
+            /* if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.form.customerEmail)) {
                 if (document.getElementById('customerEmailHelp')) {
                     document.getElementById('customerEmailHelp').remove();
                 }
@@ -141,9 +122,9 @@ export default {
                 element.classList.add('is-invalid');
                 element.insertAdjacentHTML('afterend', `<small id="customerEmailHelp" class="text-danger">Email non valida</small>`);
                 isValid = false;
-            }
+            } */
 
-            if (this.form.customerPhoneNumber.length < 10 || this.form.customerPhoneNumber.length > 15 || !/^\d+$/.test(this.form.customerPhoneNumber)) {
+            /* if (this.form.customerPhoneNumber.length < 10 || this.form.customerPhoneNumber.length > 15 || !/^\d+$/.test(this.form.customerPhoneNumber)) {
                 if (document.getElementById('customerPhoneNumberHelp')) {
                     document.getElementById('customerPhoneNumberHelp').remove();
                 }
@@ -151,7 +132,7 @@ export default {
                 element.classList.add('is-invalid');
                 element.insertAdjacentHTML('afterend', `<small id="customerPhoneNumberHelp" class="text-danger">Numero di telefono non valido</small>`);
                 isValid = false;
-            }
+            } */
 
             return isValid;
         },
@@ -175,7 +156,7 @@ export default {
     <div class="d-flex align-items-center flex-column p-3">
         <div v-if="error" class="text-danger fs-3 mb-3">{{ error }}</div>
         <h1 class="mb-4">Braintree Drop-in</h1>
-        <form @submit.prevent="onSubmit" @submit="valData" class="container">
+        <form @submit.prevent="onSubmit" @submit="submitPayment" class="container">
             <div class="row">
                 <div class="col-6">
                     <div class="mb-3">
