@@ -24,6 +24,16 @@ const saveToLocalStorage = () => {
 	localStorage.setItem("items", JSON.stringify(state.items));
 };
 
+/* calcola il totale del carrello */
+state.calculateTotal = function () {
+	let total = 0;
+	for (let item of this.items) {
+		const price = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
+		total += item.quantity * price;
+	}
+	return total.toFixed(2);
+};
+
 /* axios call all'api */
 state.callApi = function () {
 	axios
