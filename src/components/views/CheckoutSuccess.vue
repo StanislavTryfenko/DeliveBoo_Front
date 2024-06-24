@@ -1,7 +1,13 @@
 <script>
+import router from "../../router";
+
 export default {
     name: "CheckoutSuccess",
-};
+    /* se si vuole fare un redirect automatico dopo 5 secondi
+    created() {
+        setTimeout(() => this.$router.push({ name: 'home' }), 5000);
+    } */
+}
 </script>
 
 <template>
