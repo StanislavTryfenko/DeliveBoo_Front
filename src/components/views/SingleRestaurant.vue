@@ -99,7 +99,7 @@ export default {
 
                         <div class="col-6 col-md-3 align-self-center">
                             <img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
-                                :alt="restaurant.name_restaurant" class="card-img my_card_img">
+                                :alt="restaurant.name_restaurant" class="card-img my_card_img" height="200">
                             <img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
                                 class="card-img">
                         </div>
