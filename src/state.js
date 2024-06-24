@@ -19,6 +19,7 @@ export const state = reactive({
 				this.dishes = response.data.dishes;
 				//console.log("ristoranti caricati da state:", this.restaurants);
 				console.log("tipologie caricate da state:", this.types);
+				console.log(response.data);
 				this.loading = false;
 			})
 			.catch(err => {
