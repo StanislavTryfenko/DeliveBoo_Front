@@ -145,6 +145,7 @@ export default {
 							</div>
 						</div>
 
+
 						<div class="col-6 col-md-3 align-self-center">
 							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
 								class="card-img my_card_img">
@@ -155,6 +156,7 @@ export default {
 			</div>
 		</div>
 	</div>
+
 </template>
 
 <style lang="scss">

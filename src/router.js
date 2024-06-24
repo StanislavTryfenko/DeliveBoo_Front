@@ -5,6 +5,7 @@ import SingleRestaurant from "./components/views/SingleRestaurant.vue";
 import Cart from "./components/views/Cart.vue";
 import NotFound from "./components/views/NotFound.vue";
 import SingleRestaurantNotFound from "./components/views/SingleRestaurantNotFound.vue";
+import Checkout from "./components/views/Checkout.vue";
 
 
 const router = createRouter({
@@ -34,6 +35,11 @@ const router = createRouter({
             path: "/:pathMatch(.*)*",
             name: 'not-found',
             component: SingleRestaurantNotFound
+        },
+        {
+            path: "/checkout",
+            name: 'checkout',
+            component: Checkout
         }
     ]
 });
