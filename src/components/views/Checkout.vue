@@ -3,11 +3,15 @@
         <Payment :authorization="initialToken"></Payment>
     </template>
     <div v-else>loading...</div>
+
+    <!-- <PaymentForm /> -->
 </template>
 
 <script>
 import Payment from '../partials/Payment.vue';
 import axios from 'axios';
+
+import PaymentForm from '../partials/PaymentForm.vue'
 
 export default {
     data() {
@@ -16,7 +20,8 @@ export default {
         }
     },
     components: {
-        Payment
+        Payment,
+        PaymentForm
     },
     methods: {
         getInitialToken() {
