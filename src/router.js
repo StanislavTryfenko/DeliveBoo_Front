@@ -6,6 +6,7 @@ import Cart from "./components/views/Cart.vue";
 import NotFound from "./components/views/NotFound.vue";
 import SingleRestaurantNotFound from "./components/views/SingleRestaurantNotFound.vue";
 import Checkout from "./components/views/Checkout.vue";
+import CheckoutSuccess from "./components/views/CheckoutSuccess.vue"
 
 
 const router = createRouter({
@@ -40,7 +41,12 @@ const router = createRouter({
             path: "/checkout",
             name: 'checkout',
             component: Checkout
-        }
+        },
+        {
+            path: "/checkout_success",
+            name: 'checkout_success',
+            component: CheckoutSuccess
+        },
     ]
 });
 
