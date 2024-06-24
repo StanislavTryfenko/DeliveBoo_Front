@@ -3,116 +3,163 @@ import { state } from '../../state';
 import axios from 'axios';
 
 export default {
-    name: "SingleRestaurant",
-    data() {
-        return {
-            state,
-            dishes: [],
-            restaurant: '',
-            single_restaurant_api: 'api/restaurant',
-            baseApiUrl: 'http://127.0.0.1:8000/'
-        }
-    },
-    mounted() {
-        this.getSingleRestaurant(this.$route.params.id);
-        /* console.log(this.$route.params.id) */
-    },
-    methods: {
-        getSingleRestaurant(id) {
-            axios
-                .get(state.base_api + this.single_restaurant_api + `/${id}`)
-                .then(response => {
-                    console.log(state.base_api + this.single_restaurant_api + `/${id}`);
-                    if (response.data.success) {
-                        console.log(response.data);
-                        this.restaurant = response.data.restaurant;
-                        this.dishes = this.restaurant.dishes;
-                        console.log("ristorante selezionato:", this.restaurant);
+	name: "SingleRestaurant",
+	data() {
+		return {
+			state,
+			dishes: [],
+			restaurant: '',
+			single_restaurant_api: 'api/restaurant',
+			baseApiUrl: 'http://127.0.0.1:8000/'
+		}
+	},
+	mounted() {
+		this.getSingleRestaurant(this.$route.params.id);
+		/* console.log(this.$route.params.id) */
+	},
+	methods: {
+		getSingleRestaurant(id) {
+			axios
+				.get(state.base_api + this.single_restaurant_api + `/${id}`)
+				.then(response => {
+					/* console.log(state.base_api + this.single_restaurant_api + `/${id}`); */
+					if (response.data.success) {
+						/* console.log(response.data); */
+						this.restaurant = response.data.restaurant;
+						this.dishes = this.restaurant.dishes;
+						console.log("ristorante selezionato:", this.restaurant);
+						console.log("dishes caricati:", this.dishes);
+					} else {
+						this.$router.push({ name: 'not-found' })
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		},
+		addItem(dish) {
+			const restaurantId = this.restaurant.id;
 
-                    } else {
-                        this.$router.push({ name: 'not-found' })
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }
-    }
+			/* controlla restaurant_id dei dishes nel carrello */
+			if (state.items.length > 0) {
+				// Ottieni il restaurant_id del primo piatto nel carrello
+				const existingRestaurantId = state.items[0].restaurant_id;
+				if (existingRestaurantId !== restaurantId) {
+					console.log("Non puoi aggiungere piatti da un ristorante diverso.");
+					return;
+				}
+			}
+			const index = state.items.findIndex(item => item.id === dish.id);
+			/* vedi se il piatto è gia presente, quindi crea o aumenta quantity */
+			if (index !== -1) {
+				state.items[index].quantity++;
+			} else {
+				state.items.push({ ...dish, quantity: 1 });
+			}
+			this.saveToLocalStorage();
+			console.log("Hai aggiunto il piatto:", dish);
+		},
+		removeItem(dish) {
+			const index = state.items.findIndex(item => item.id === dish.id);
+			if (index !== -1 && state.items[index].quantity > 0) {
+				state.items[index].quantity--;
+				console.log("hai rimosso il piatto ", dish);
+				this.saveToLocalStorage();
+			}
+		},
+		/* salva gli items in local storage */
+		saveToLocalStorage() {
+			localStorage.setItem("items", JSON.stringify(state.items));
+			console.log("carrello attuale: ", state.items);
+		},
+		getItemQuantity(itemId) {
+			const item = state.items.find(item => item.id === itemId);
+			return item ? item.quantity : 0;
+		}
+	}
 };
 </script>
 
 <template>
-    <div class="container-fluid">
+	<div class="container-fluid">
 
-        <div class="row p-3 shadow-lg">
-            <div class="col-12 py-1">
-                <router-link :to="{ name: 'home' }" class="no_style text-secondary px-1">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Torna Indietro
-                </router-link>
-            </div>
+		<div class="row p-3 shadow-lg">
+			<div class="col-12 py-1">
+				<router-link :to="{ name: 'home' }" class="no_style text-secondary px-1">
+					<i class="fa-solid fa-arrow-left"></i>
+					Torna Indietro
+				</router-link>
+			</div>
 
-            <!-- restaurant dashboard -->
-            <div class="col-12 col-sm-4 py-3">
-                <img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
-                    :alt="restaurant.name_restaurant" class="card-img-top my_card_img img-thumbnail">
-                <img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
-                    class="card-img-top img-thumbnail">
-            </div>
-            <div class="col-8 py-3">
-                <h2>{{ restaurant.name_restaurant }}</h2>
-                <ul class="list-inline mb-5">
-                    <li v-for="type in restaurant.types" class="list-inline-item">{{ type.name }};</li>
-                </ul>
-                <div class="d-flex align-items-center gap-2 text-secondary">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span class="fs-5">Informazioni</span>
-                </div>
-                <p class="fs-3">{{ restaurant.description }}</p>
+			<!-- restaurant dashboard -->
+			<div class="col-12 col-sm-4 py-3">
+				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
+					class="card-img-top my_card_img img-thumbnail">
+				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
+					class="card-img-top img-thumbnail">
+			</div>
+			<div class="col-8 py-3">
+				<h2>{{ restaurant.name_restaurant }}</h2>
+				<ul class="list-inline mb-5">
+					<li v-for="type in restaurant.types" class="list-inline-item">{{ type.name }};</li>
+				</ul>
+				<div class="d-flex align-items-center gap-2 text-secondary">
+					<i class="fa-solid fa-circle-info"></i>
+					<span class="fs-5">Informazioni</span>
+				</div>
+				<p class="fs-3">{{ restaurant.description }}</p>
 
-                <p><i class="fa-solid fa-phone"></i> {{ restaurant.phone_number }}</p>
-                <p><i class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
-                <p><i class="fa-solid fa-envelope"></i> {{ restaurant.contact_email }}</p>
+				<p><i class="fa-solid fa-phone"></i> {{ restaurant.phone_number }}</p>
+				<p><i class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
+				<p><i class="fa-solid fa-envelope"></i> {{ restaurant.contact_email }}</p>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <!-- dishes list -->
-        <div class="row p-3 bg-light">
-            <div class="col-12 px-5 py-2">
-                <h4>MENU</h4>
-            </div>
-            <div class="col-12 col-md-6" v-for="dish in restaurant.dishes">
-                <div class="card p-3 m-2">
-                    <div class="row">
-                        <div class="col-6 col-md-9 px-3 py-1">
-                            <h5>
-                                {{ dish.name }}
-                            </h5>
-                            <p class="mb-1">€ {{ dish.price }}</p>
-                            <p class="mb-1"> {{ dish.description }}</p>
-                            <br>
-                            <button class="btn rounded border">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
+		<!-- dishes list -->
+		<div class="row p-3 bg-light">
+			<div class="col-12 px-5 py-2">
+				<h4>MENU</h4>
+			</div>
+			<div class="col-12 col-md-6" v-for="dish in restaurant.dishes">
+				<div class="card p-3 m-2">
+					<div class="row">
+						<div class="col-6 col-md-9 px-3 py-1">
+							<h5>
+								{{ dish.name }}
+							</h5>
+							<p class="mb-1">€ {{ dish.price }}</p>
+							<p class="mb-1"> {{ dish.description }}</p>
+							<br>
+							<!-- stato del carrello -->
+							<div class="d-flex gap-2">
+								<button class="btn rounded border" @click="addItem(dish)">
+									<i class="fa-solid fa-plus"></i>
+								</button>
+								<div class="border rounded text-center p-1 px-3" style="vertical-align: middle;">
+									{{ getItemQuantity(dish.id) }}
+								</div>
+								<button class="btn rounded border" @click="removeItem(dish)">
+									<i class="fa-solid fa-minus"></i>
+								</button>
+							</div>
+						</div>
 
-                        <div class="col-6 col-md-3 align-self-center">
-                            <img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
-                                :alt="restaurant.name_restaurant" class="card-img my_card_img">
-                            <img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
-                                class="card-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<div class="col-6 col-md-3 align-self-center">
+							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
+								class="card-img my_card_img">
+							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <style lang="scss">
 .no_style {
-    text-decoration: none;
-    color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 </style>
