@@ -1,11 +1,12 @@
 <script>
+import axios from 'axios';
 import { state } from '../../state';
 
 export default {
 	name: "ShoppingCart",
 	data() {
 		return {
-			
+			state,
 		};
 	},
 	computed: {
@@ -49,6 +50,9 @@ export default {
 			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
 		<div class="offcanvas-body">
+
+			<strong v-if="state.items.length != 0">Stai ordinando da: {{ state.cartRestraurantName }}</strong>
+
 			<table v-if="cart.length > 0" class="table">
 				<tbody>
 					<tr v-for="item in cart" :key="item.id">
@@ -72,7 +76,7 @@ export default {
 			<p v-else>Il carrello è vuoto.</p>
 		</div>
 		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center" v-if="cart.length > 0">
-			<router-link :to="{ name: 'checkout' }" >
+			<router-link :to="{ name: 'checkout' }">
 				<button class="btn border rounded ">Vai al pagamento</button>
 			</router-link>
 			<button class="btn border rounded text-danger" @click="clearCart">Svuota carrello</button>

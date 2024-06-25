@@ -1,5 +1,6 @@
 <script>
 import ShoppingCart from './ShoppingCart.vue'
+import { state } from '../../state';
 
 export default {
 	name: "AppHeader",
@@ -8,6 +9,7 @@ export default {
 	},
 	data() {
 		return {
+			state,
 			menu: [
 				{
 					route: 'home',
@@ -19,6 +21,8 @@ export default {
 				},
 			]
 		}
+	}, mounted() {
+		state.callApi()
 	}
 };
 </script>
