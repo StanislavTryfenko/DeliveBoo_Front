@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-	<div class="offcanvas offcanvas-end w-50" tabindex="-1" id="my_offcanvas" aria-labelledby="offcanvasExampleLabel"
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="my_offcanvas" aria-labelledby="offcanvasExampleLabel"
 		data-bs-backdrop="static">
 		<div class="offcanvas-header">
 			<h4 class="offcanvas-title" id="offcanvasExampleLabel">Il mio Carrello</h4>
@@ -96,6 +96,13 @@ export default {
 		td {
 			vertical-align: middle;
 		}
+	}
+
+	width: 600px;
+
+	@media(max-width: 425px) {
+		width: 400px;
+		padding: 1rem;
 	}
 }
 </style>
