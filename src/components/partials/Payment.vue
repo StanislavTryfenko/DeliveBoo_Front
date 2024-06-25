@@ -22,6 +22,7 @@ export default {
 				//status ha un valore di default
 			},
 			error: '',
+			state,
 		}
 	},
 	props: [
@@ -75,6 +76,7 @@ export default {
 					if (this.isValid === true) {
 						axios.post('http://127.0.0.1:8000/api/orders/make/payment', this.form)
 							.then((response) => {
+								state.order_resume = state.items
 								this.clearCart();
 								console.log(response);
 								this.$router.push({ name: 'checkout_success' })
@@ -173,7 +175,8 @@ export default {
 				<div class="col-6">
 					<div class="mb-3">
 						<label for="customerName" class="form-label">Nome</label>
-						<input id="customerName" class="d-block" type="text" v-model="form.customerName" placeholder="Mario" />
+						<input id="customerName" class="d-block" type="text" v-model="form.customerName"
+							placeholder="Mario" />
 					</div>
 					<div class="mb-3">
 						<label for="customerLastName" class="form-label">Cognome</label>
