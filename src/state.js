@@ -8,7 +8,8 @@ const initialState = {
 	typesList: [],
 	base_api: "http://127.0.0.1:8000/",
 	restaurants_api: "api/restaurants",
-	items: []
+	items: [],
+	order_resume: []
 };
 
 

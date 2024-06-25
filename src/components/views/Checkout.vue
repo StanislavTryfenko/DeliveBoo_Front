@@ -1,11 +1,11 @@
     <script>
     import Payment from '../partials/Payment.vue';
     import axios from 'axios';
-    
+
     export default {
         data() {
             return {
-                initialToken: ''
+                initialToken: '',
             }
         },
         components: {
@@ -26,7 +26,7 @@
             this.getInitialToken()
         }
     }
-    </script>
+</script>
 
 <template>
     <template v-if="initialToken !== ''">
