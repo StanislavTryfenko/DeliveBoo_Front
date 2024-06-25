@@ -28,8 +28,8 @@ export default {
 						/* console.log(response.data); */
 						this.restaurant = response.data.restaurant;
 						this.dishes = this.restaurant.dishes;
-						console.log("ristorante selezionato:", this.restaurant);
-						console.log("dishes caricati:", this.dishes);
+						// console.log("ristorante selezionato:", this.restaurant);
+						// console.log("dishes caricati:", this.dishes);
 					} else {
 						this.$router.push({ name: 'not-found' })
 					}
@@ -60,7 +60,9 @@ export default {
 				state.items.push({ ...dish, quantity: 1 });
 			}
 			this.saveToLocalStorage();
-			console.log("Hai aggiunto il piatto:", dish);
+			// console.log("Hai aggiunto il piatto:", dish);
+			state.cartRestraurantName = this.restaurant.name_restaurant;
+			console.log(state.cartRestraurantName, this.restaurant.name_restaurant);
 		},
 		removeItem(dish) {
 			const index = state.items.findIndex(item => item.id === dish.id);
@@ -73,7 +75,7 @@ export default {
 		/* salva gli items in local storage */
 		saveToLocalStorage() {
 			localStorage.setItem("items", JSON.stringify(state.items));
-			console.log("carrello attuale: ", state.items);
+			// console.log("carrello attuale: ", state.items);
 		},
 		getItemQuantity(itemId) {
 			const item = state.items.find(item => item.id === itemId);
@@ -147,14 +149,14 @@ export default {
 							<br>
 							<!-- stato del carrello -->
 							<div class="d-flex gap-2">
-								<button class="btn rounded border" @click="addItem(dish)">
-									<i class="fa-solid fa-plus"></i>
+								<button class="btn rounded border" @click="removeItem(dish)">
+									<i class="fa-solid fa-minus"></i>
 								</button>
 								<div class="border rounded text-center p-1 px-3" style="vertical-align: middle;">
 									{{ getItemQuantity(dish.id) }}
 								</div>
-								<button class="btn rounded border" @click="removeItem(dish)">
-									<i class="fa-solid fa-minus"></i>
+								<button class="btn rounded border" @click="addItem(dish)">
+									<i class="fa-solid fa-plus"></i>
 								</button>
 							</div>
 						</div>

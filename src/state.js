@@ -9,7 +9,8 @@ const initialState = {
 	base_api: "http://127.0.0.1:8000/",
 	restaurants_api: "api/restaurants",
 	items: [],
-	order_resume: []
+	order_resume: [],
+	cartRestraurantName: '',
 };
 
 
