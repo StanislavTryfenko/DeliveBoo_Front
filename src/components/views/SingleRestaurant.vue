@@ -10,7 +10,8 @@ export default {
 			dishes: [],
 			restaurant: '',
 			single_restaurant_api: 'api/restaurant',
-			baseApiUrl: 'http://127.0.0.1:8000/'
+			baseApiUrl: 'http://127.0.0.1:8000/',
+			showModal: false
 		}
 	},
 	mounted() {
@@ -45,7 +46,9 @@ export default {
 				// Ottieni il restaurant_id del primo piatto nel carrello
 				const existingRestaurantId = state.items[0].restaurant_id;
 				if (existingRestaurantId !== restaurantId) {
+					//apri modale con messaggio che non puoi effettuare tale operazione
 					console.log("Non puoi aggiungere piatti da un ristorante diverso.");
+					this.showModal = true;
 					return;
 				}
 			}
@@ -83,6 +86,17 @@ export default {
 <template>
 	<div class="container-fluid">
 
+		<!-- modale errore -->
+		<div class="row justify-content-center py-4" v-if="showModal">
+			<div class="col-6 d-flex justify-content-between align-items-center">
+				<h4 class="text-danger">Puoi ordinare da un solo ristorante!</h4>
+				<button class="btn" @click="this.showModal = false">
+					<i class="fa-solid fa-x"></i>
+				</button>
+			</div>
+		</div>
+
+		<!-- vista principale -->
 		<div class="row p-3 shadow-lg">
 			<div class="col-12 py-1">
 				<router-link :to="{ name: 'home' }" class="no_style text-secondary px-1">
@@ -93,8 +107,8 @@ export default {
 
 			<!-- restaurant dashboard -->
 			<div class="col-12 col-sm-4 py-3">
-				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
-					class="card-img-top my_card_img img-thumbnail">
+				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
+					:alt="restaurant.name_restaurant" class="card-img-top my_card_img img-thumbnail">
 				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
 					class="card-img-top img-thumbnail">
 			</div>
@@ -147,9 +161,10 @@ export default {
 
 
 						<div class="col-6 col-md-3 align-self-center">
-							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
-								class="card-img my_card_img">
-							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">
+							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
+								:alt="restaurant.name_restaurant" class="card-img my_card_img">
+							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
+								class="card-img">
 						</div>
 					</div>
 				</div>
