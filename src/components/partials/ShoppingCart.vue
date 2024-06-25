@@ -5,7 +5,7 @@ export default {
 	name: "ShoppingCart",
 	data() {
 		return {
-
+			state
 		};
 	},
 	computed: {
@@ -71,11 +71,11 @@ export default {
 			</table>
 			<p v-else>Il carrello è vuoto.</p>
 		</div>
-		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center">
-			<router-link :to="{ name: 'checkout' }">
-				<button class="btn border rounded">Vai al pagamento</button>
+		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center" v-if="cart.length > 0">
+			<router-link :to="{ name: 'checkout' }" >
+				<button class="btn border rounded ">Vai al pagamento</button>
 			</router-link>
-			<button class="btn border rounded" @click="clearCart">Svuota carrello</button>
+			<button class="btn border rounded text-danger" @click="clearCart">Svuota carrello</button>
 		</div>
 	</div>
 </template>
