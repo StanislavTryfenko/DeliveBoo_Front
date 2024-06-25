@@ -5,7 +5,7 @@ export default {
 	name: "ShoppingCart",
 	data() {
 		return {
-			state
+			
 		};
 	},
 	computed: {
