@@ -74,6 +74,8 @@ export default {
 				</tbody>
 			</table>
 			<p v-else>Il carrello è vuoto.</p>
+
+			<strong v-if="state.items.length != 0">Totale: {{ state.calculateTotal() }}</strong>
 		</div>
 		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center" v-if="cart.length > 0">
 			<router-link :to="{ name: 'checkout' }">

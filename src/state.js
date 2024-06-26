@@ -37,6 +37,15 @@ state.calculateTotal = function () {
 	return total.toFixed(2);
 };
 
+state.dishesTotal = function () {
+	let dishTotal = 0;
+	for (let item of this.items) {
+		const quantity = typeof item.quantity === 'string' ? parseFloat(item.quantity) : item.quantity;
+		dishTotal += item.quantity;
+	}
+	return dishTotal;
+};
+
 /* axios call all'api */
 state.callApi = function () {
 	axios

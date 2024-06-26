@@ -9,6 +9,16 @@ export default {
             state
         }
     },
+    methods: {
+        calculateTotal() {
+            let total = 0;
+            for (let item of state.order_resume) {
+                const price = typeof item.price === 'string' ? parseFloat(item.price) : item.price;
+                total += item.quantity * price;
+            }
+            return total.toFixed(2);
+        }
+    },
     mounted() {
         console.log(state.order_resume);
     }
@@ -41,6 +51,15 @@ export default {
                             <td scope="row">{{ order_item.name }}</td>
                             <td>{{ order_item.price }}</td>
                             <td>{{ order_item.quantity }}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>
+                                <strong>Totale:</strong>
+                            </td>
+                            <td></td>
+                            <td>
+                                {{ calculateTotal() }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>

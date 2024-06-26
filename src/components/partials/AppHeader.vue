@@ -46,7 +46,11 @@ export default {
 						<i class="fa-solid fa-cart-shopping">
 							<ShoppingCart />
 						</i>
+						<span class="text-light ms-2">
+							{{ state.dishesTotal() }}
+						</span>
 					</button>
+
 					<a href="http://127.0.0.1:8000/" target="_blank"><i class="fa-solid fa-user"></i></a>
 				</div>
 			</div>
