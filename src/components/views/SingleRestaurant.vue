@@ -60,7 +60,7 @@ export default {
 				state.items.push({ ...dish, quantity: 1 });
 			}
 			this.saveToLocalStorage();
-			// console.log("Hai aggiunto il piatto:", dish);
+
 			state.cartRestraurantName = this.restaurant.name_restaurant;
 			console.log(state.cartRestraurantName, this.restaurant.name_restaurant);
 		},
@@ -75,7 +75,7 @@ export default {
 		/* salva gli items in local storage */
 		saveToLocalStorage() {
 			localStorage.setItem("items", JSON.stringify(state.items));
-			// console.log("carrello attuale: ", state.items);
+			console.log("carrello attuale: ", state.items);
 		},
 		getItemQuantity(itemId) {
 			const item = state.items.find(item => item.id === itemId);

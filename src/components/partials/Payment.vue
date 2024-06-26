@@ -172,7 +172,7 @@ export default {
 <template>
     <div class="d-flex align-items-center flex-column p-3">
         <div v-if="error" class="text-danger fs-3 mb-3">{{ error }}</div>
-        <h1 class="mb-4">Riepilogo Ordine e Pagamento</h1>
+        <h2 class="mb-4">Pagamento</h2>
         <form @submit.prevent="onSubmit" @submit="submitPayment" class="container">
             <div class="row">
                 <div class="col-6">
@@ -210,10 +210,41 @@ export default {
                         Paga
                     </span>
                 </button>
-
             </div>
         </form>
+        <div class="col-6 mt-4">
+            <h2 class="mb-4">Riepilogo Ordine</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">Prodotto</th>
+                            <th scope="col">Prezzo</th>
+                            <th scope="col">Quantità</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" v-for="order_item in state.items">
+                            <td scope="row">{{ order_item.name }}</td>
+                            <td>{{ order_item.price }}</td>
+                            <td>{{ order_item.quantity }}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>
+                                <strong>Totale:</strong>
+                            </td>
+                            <td></td>
+                            <td>
+                                {{ state.calculateTotal() }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
+
 </template>
 
 <style></style>
