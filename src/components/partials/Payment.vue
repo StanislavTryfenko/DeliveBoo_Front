@@ -174,36 +174,36 @@ export default {
         <div v-if="error" class="text-danger fs-3 mb-3">{{ error }}</div>
         <h2 class="mb-4">Pagamento</h2>
         <form @submit.prevent="onSubmit" @submit="submitPayment" class="container">
-            <div class="row">
-                <div class="col-6">
+            <div class="row  row-cols-1 row-cols-md-2">
+                <div class="col">
                     <div class="mb-3">
                         <label for="customerName" class="form-label"><strong>Nome: *</strong></label>
-                        <input id="customerName" class="d-block" type="text" v-model="form.customerName"
+                        <input id="customerName" class="d-block w-100" type="text" v-model="form.customerName"
                             placeholder="Mario" />
                     </div>
                     <div class="mb-3">
                         <label for="customerLastName" class="form-label"><strong>Cognome: *</strong></label>
-                        <input id="customerLastName" class="d-block" type="text" v-model="form.customerLastName"
+                        <input id="customerLastName" class="d-block w-100" type="text" v-model="form.customerLastName"
                             placeholder="Rossi" />
                     </div>
                     <div class="mb-3">
                         <label for="customerEmail" class="form-label"><strong>Email: *</strong></label>
-                        <input id="customerEmail" class="d-block" type="text" v-model="form.customerEmail"
+                        <input id="customerEmail" class="d-block w-100" type="text" v-model="form.customerEmail"
                             placeholder="mariorossi@email.com" />
                     </div>
                     <div class="mb-3">
                         <label for="customerPhoneNumber" class="form-label"><strong>Cellulare: *</strong></label>
-                        <input id="customerPhoneNumber" class="d-block" type="tel" v-model="form.customerPhoneNumber"
-                            placeholder="1234567890" />
+                        <input id="customerPhoneNumber" class="d-block w-100" type="tel"
+                            v-model="form.customerPhoneNumber" placeholder="1234567890" />
                     </div>
                     <div class="mb-3">
                         <label for="customerAddress" class="form-label"><strong>Indirizzo: *</strong></label>
-                        <input id="customerAddress" class="d-block" type="text" v-model="form.customerAddress"
+                        <input id="customerAddress" class="d-block w-100" type="text" v-model="form.customerAddress"
                             placeholder="Via del Corso 10" />
                     </div>
                 </div>
-                <div id="dropin-container" class="col-6"></div>
-                <button type="submit" class="btn btn-primary" :disabled="btn_loading"><span v-if="btn_loading">
+                <div id="dropin-container" class="col"></div>
+                <button type="submit" class="btn btn-primary mx-auto" :disabled="btn_loading"><span v-if="btn_loading">
                         <i class="fa-solid fa-arrows-rotate"></i> Invio...
                     </span>
                     <span v-else>
@@ -212,7 +212,7 @@ export default {
                 </button>
             </div>
         </form>
-        <div class="col-6 mt-4">
+        <div class="col mt-4">
             <h2 class="mb-4">Riepilogo Ordine</h2>
             <div class="table-responsive">
                 <table class="table">

@@ -61,7 +61,7 @@ export default {
 						<tr v-for="item in cart" :key="item.id">
 							<td>{{ item.name }}</td>
 							<td>€ {{ item.price }}</td>
-							<td class="d-flex gap-2 align-items-center">
+							<td class="d-flex gap-2 align-items-center pb-4">
 								<div class="btn rounded border" @click="decreaseQuantity(item)">
 									<i class="fa-solid fa-minus"></i>
 								</div>
