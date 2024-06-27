@@ -66,6 +66,11 @@ export default {
 #my_header {
 	background-color: $primary;
 	color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 10;
 
 	i {
 		font-size: 1.2rem;
