@@ -177,7 +177,7 @@ export default {
 
 <template>
     <div class="d-flex align-items-center flex-column p-3">
-        <div v-if="error" class="text-danger fs-3 mb-3">{{ error }}</div>
+        <!-- <div v-if="error" class="text-danger fs-3 mb-3">{{ error }}</div> -->
         <h2 class="mb-4">Pagamento</h2>
         <form @submit.prevent="onSubmit" @submit="submitPayment" class="container">
             <div class="row  row-cols-1 row-cols-md-2">
