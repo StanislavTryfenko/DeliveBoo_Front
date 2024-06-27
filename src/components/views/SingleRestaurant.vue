@@ -204,11 +204,9 @@ export default {
 	height: 20%;
 }
 
-.card {
-	img {
-		width: 100%;
-		aspect-ratio: 1;
-		object-fit: cover
-	}
+img {
+	width: 80%;
+	aspect-ratio: 1;
+	object-fit: cover
 }
 </style>
