@@ -70,10 +70,14 @@ export default {
 		},
 		removeItem(dish) {
 			const index = state.items.findIndex(item => item.id === dish.id);
-			if (index !== -1 && state.items[index].quantity > 0) {
+			if (index !== -1 && state.items[index].quantity > 1) {
 				state.items[index].quantity--;
 				console.log("hai rimosso il piatto ", dish);
 				this.saveToLocalStorage();
+			} else {
+				state.items = state.items.filter(item => item.id !== state.items[index].id);
+				this.saveToLocalStorage();
+				console.log("it's working");
 			}
 		},
 		/* salva gli items in local storage */

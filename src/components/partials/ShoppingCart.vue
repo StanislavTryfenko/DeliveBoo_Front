@@ -52,7 +52,7 @@ export default {
 		<div class="offcanvas-body">
 
 
-			<div v-if="state.dishesTotal() !== 0">
+			<div v-if="cart.length > 0">
 
 				<strong>Stai ordinando da: {{ state.cartRestraurantName }}</strong>
 
