@@ -18,12 +18,13 @@ export default {
                 customerAddress: '',
                 customerEmail: '',
                 isValid: true,
+                allDishes: state.items,
                 //il total price verrà calcolato lato back per sicurezza
                 //status ha un valore di default
             },
             error: '',
             state,
-            btn_loading: false,
+            btnDisabled: false,
         }
     },
     props: [
@@ -48,7 +49,7 @@ export default {
             })
         },
         submitPayment() {
-            this.btn_loading = true;
+            this.disableButton()
             this.valData();
             if (this.instance) {
                 this.instance.requestPaymentMethod((error, payload) => {
@@ -82,7 +83,6 @@ export default {
                                 this.clearCart();
                                 console.log(response);
                                 this.$router.push({ name: 'checkout_success' })
-                                this.btn_loading = false;
                             })
                             .catch((error) => {
                                 if (error.message === 'Request failed with status code 422') {
@@ -156,6 +156,12 @@ export default {
             state.items = [];
             localStorage.removeItem('items');
             console.log('carrello svuotato');
+        },
+        disableButton() {
+            this.btnDisabled = true;
+            setTimeout(() => {
+                this.btnDisabled = false
+            }, 5000)
         }
     },
     beforeDestroy() {
@@ -203,7 +209,7 @@ export default {
                     </div>
                 </div>
                 <div id="dropin-container" class="col"></div>
-                <button type="submit" class="btn btn-primary mx-auto" :disabled="btn_loading"><span v-if="btn_loading">
+                <button type="submit" class="btn btn-primary mx-auto" :disabled="btnDisabled"><span v-if="btnDisabled">
                         <i class="fa-solid fa-arrows-rotate"></i> Invio...
                     </span>
                     <span v-else>
