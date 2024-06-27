@@ -51,7 +51,7 @@ export default {
 						</span>
 					</button>
 
-					<a href="http://127.0.0.1:8000/" target="_blank"><i class="fa-solid fa-user"></i></a>
+					<a href="http://127.0.0.1:8000/dashboard" target="_blank"><i class="fa-solid fa-user"></i></a>
 				</div>
 			</div>
 
