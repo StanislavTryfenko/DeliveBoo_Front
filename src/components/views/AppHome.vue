@@ -54,13 +54,13 @@ export default {
 <template>
 	<!-- jumbotron with search bar -->
 	<section id="my_jumbotron">
-		<div class="container-fluid text-center h-100 py-5">
+		<!-- <div class="container-fluid text-center h-100 py-5">
 			<div class="row h-100 justify-content-center align-items-end">
 				<div class="col-6 col-md-8 d-flex justify-content-center" id="search_card">
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</section>
 
 	<!-- vista principale -->
@@ -77,8 +77,9 @@ export default {
 
 							<label :for="'type-' + type.id" class="d-flex align-items-center m-1"
 								:class="{ 'active_filter': typesList.includes(type.id) }">
-								<input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters" type="checkbox"
-									:value="type.id" :id="'type-' + type.id" v-model="typesList" @change="callFilters" />
+								<input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters"
+									type="checkbox" :value="type.id" :id="'type-' + type.id" v-model="typesList"
+									@change="callFilters" />
 								{{ type.name }}
 							</label>
 						</div>
