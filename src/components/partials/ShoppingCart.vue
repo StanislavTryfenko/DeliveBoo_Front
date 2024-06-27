@@ -61,7 +61,7 @@ export default {
 						<tr v-for="item in cart" :key="item.id">
 							<td>{{ item.name }}</td>
 							<td>€ {{ item.price }}</td>
-							<td class="d-flex gap-2 align-items-center">
+							<td class="d-flex gap-2 align-items-center pb-4">
 								<div class="btn rounded border" @click="decreaseQuantity(item)">
 									<i class="fa-solid fa-minus"></i>
 								</div>
@@ -86,9 +86,11 @@ export default {
 		</div>
 		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center" v-if="cart.length > 0">
 			<router-link :to="{ name: 'checkout' }">
-				<button class="btn border rounded ">Vai al pagamento</button>
+				<button class="btn border rounded checkout text-dark">
+					Completa l'ordine
+				</button>
 			</router-link>
-			<button class="btn border rounded text-danger" @click="clearCart">Svuota carrello</button>
+			<button class="btn border rounded text-danger" @click="clearCart">Svuota</button>
 		</div>
 	</div>
 </template>
@@ -117,5 +119,6 @@ export default {
 		width: 400px;
 		padding: 1rem;
 	}
+
 }
 </style>

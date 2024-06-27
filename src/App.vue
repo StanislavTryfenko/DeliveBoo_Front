@@ -19,4 +19,8 @@ export default {
 	<!-- <AppFooter /> -->
 </template>
 
-<style></style>
+<style>
+main {
+	margin-top: 3rem
+}
+</style>

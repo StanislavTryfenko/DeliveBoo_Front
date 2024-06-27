@@ -98,13 +98,16 @@ export default {
 
 		<!-- modale errore -->
 
-		<div class="row justify-content-center py-4" v-if="showModal" id="modalCartError">
-			<div class="col-6 d-flex justify-content-between align-items-center">
-				<h4 class="text-danger">Puoi ordinare da un solo ristorante!</h4>
-				<button type="button" class="btn btn-primary" @click="clearAndClose()">Svuota Carrello</button>
-				<button class="btn" @click="this.showModal = false">
-					<i class="fa-solid fa-x"></i>
-				</button>
+		<div class="row w-75 h-25 justify-content-center py-4 border rounded border-secondary bg-light" v-if="showModal"
+			id="modalCartError">
+			<div class="row d-flex justify-content-around align-items-center">
+				<h4 class="text-center col-12">Puoi ordinare da un solo ristorante!</h4>
+				<button class="btn btn-light text-primary col-sm-6 col-md-3" @click="this.showModal = false">Continua
+					col tuo
+					ordine</button>
+				<button type="button" class="btn btn-light text-danger col-sm-6 col-md-3"
+					@click="clearAndClose()">Svuota
+					Carrello</button>
 			</div>
 		</div>
 
@@ -183,7 +186,6 @@ export default {
 			</div>
 		</div>
 	</div>
-
 </template>
 
 <style lang="scss">
@@ -198,7 +200,6 @@ export default {
 	top: 50vh;
 	left: 50vw;
 	transform: translate(-50%, -50%);
-	background-color: lightgray;
 	width: 60%;
 	height: 20%;
 }
