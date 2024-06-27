@@ -51,31 +51,38 @@ export default {
 		</div>
 		<div class="offcanvas-body">
 
-			<strong v-if="state.items.length != 0">Stai ordinando da: {{ state.cartRestraurantName }}</strong>
 
-			<table v-if="cart.length > 0" class="table">
-				<tbody>
-					<tr v-for="item in cart" :key="item.id">
-						<td>{{ item.name }}</td>
-						<td>€ {{ item.price }}</td>
-						<td class="d-flex gap-2 align-items-center">
-							<div class="btn rounded border" @click="decreaseQuantity(item)">
-								<i class="fa-solid fa-minus"></i>
-							</div>
-							{{ item.quantity }}
-							<div class="btn rounded border" @click="increaseQuantity(item)">
-								<i class="fa-solid fa-plus"></i>
-							</div>
-						</td>
-						<td>
-							<button class="btn btn-sm btn-danger" @click="removeFromCart(item.id)">Rimuovi</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div v-if="state.dishesTotal() !== 0">
+
+				<strong>Stai ordinando da: {{ state.cartRestraurantName }}</strong>
+
+				<table class="table">
+					<tbody>
+						<tr v-for="item in cart" :key="item.id">
+							<td>{{ item.name }}</td>
+							<td>€ {{ item.price }}</td>
+							<td class="d-flex gap-2 align-items-center">
+								<div class="btn rounded border" @click="decreaseQuantity(item)">
+									<i class="fa-solid fa-minus"></i>
+								</div>
+								{{ item.quantity }}
+								<div class="btn rounded border" @click="increaseQuantity(item)">
+									<i class="fa-solid fa-plus"></i>
+								</div>
+							</td>
+							<td>
+								<button class="btn btn-sm btn-danger" @click="removeFromCart(item.id)">Rimuovi</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<strong>Totale: {{ state.calculateTotal() }}</strong>
+
+			</div>
 			<p v-else>Il carrello è vuoto.</p>
 
-			<strong v-if="state.items.length != 0">Totale: {{ state.calculateTotal() }}</strong>
+
 		</div>
 		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center" v-if="cart.length > 0">
 			<router-link :to="{ name: 'checkout' }">
