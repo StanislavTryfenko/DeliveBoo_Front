@@ -19,6 +19,10 @@ export default {
 		/* console.log(this.$route.params.id) */
 	},
 	methods: {
+		clearAndClose() {
+			state.items = [];
+			this.showModal = false;
+		},
 		getSingleRestaurant(id) {
 			axios
 				.get(state.base_api + this.single_restaurant_api + `/${id}`)
@@ -89,9 +93,11 @@ export default {
 	<div class="container-fluid">
 
 		<!-- modale errore -->
-		<div class="row justify-content-center py-4" v-if="showModal">
+
+		<div class="row justify-content-center py-4" v-if="showModal" id="modalCartError">
 			<div class="col-6 d-flex justify-content-between align-items-center">
 				<h4 class="text-danger">Puoi ordinare da un solo ristorante!</h4>
+				<button type="button" class="btn btn-primary" @click="clearAndClose()">Svuota Carrello</button>
 				<button class="btn" @click="this.showModal = false">
 					<i class="fa-solid fa-x"></i>
 				</button>
@@ -180,5 +186,16 @@ export default {
 .no_style {
 	text-decoration: none;
 	color: inherit;
+}
+
+#modalCartError {
+	position: fixed;
+	z-index: 10;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+	background-color: lightgray;
+	width: 60%;
+	height: 20%;
 }
 </style>
