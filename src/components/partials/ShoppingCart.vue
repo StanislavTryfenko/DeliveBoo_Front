@@ -77,7 +77,7 @@ export default {
 					</tbody>
 				</table>
 
-				<strong>Totale: {{ state.calculateTotal() }}</strong>
+				<strong>Totale: € {{ state.calculateTotal() }}</strong>
 
 			</div>
 			<p v-else>Il carrello è vuoto.</p>

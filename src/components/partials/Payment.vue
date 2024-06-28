@@ -232,7 +232,7 @@ export default {
                     <tbody>
                         <tr class="text-center" v-for="order_item in state.items">
                             <td scope="row">{{ order_item.name }}</td>
-                            <td>{{ order_item.price }}</td>
+                            <td>€ {{ order_item.price }}</td>
                             <td>{{ order_item.quantity }}</td>
                         </tr>
                         <tr class="text-center">
@@ -241,7 +241,7 @@ export default {
                             </td>
                             <td></td>
                             <td>
-                                {{ state.calculateTotal() }}
+                                € {{ state.calculateTotal() }}
                             </td>
                         </tr>
                     </tbody>
