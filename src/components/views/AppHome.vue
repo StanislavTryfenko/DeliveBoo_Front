@@ -87,15 +87,22 @@ export default {
 				</div>
 
 				<!-- ristoranti -->
-				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 py-3">
-					<div class="col" v-for="restaurant in state.restaurants.data">
-						<router-link :to="{ name: 'restaurant', params: { id: restaurant.id, slug: restaurant.slug } }"
-							class="no_style">
-							<RestaurantCard :restaurant="restaurant" :baseApiUrl="state.base_api" />
-						</router-link>
+				<template v-if="state.restaurants.data.length > 0">
+					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 py-3">
+						<div class="col" v-for="restaurant in state.restaurants.data">
+							<router-link
+								:to="{ name: 'restaurant', params: { id: restaurant.id, slug: restaurant.slug } }"
+								class="no_style">
+								<RestaurantCard :restaurant="restaurant" :baseApiUrl="state.base_api" />
+							</router-link>
+						</div>
 					</div>
-				</div>
-
+				</template>
+				<template v-else>
+					<h2 class="text-center mt-5 pt-5 text-secondary">
+						Nessun ristorante soddisfa questa ricerca
+					</h2>
+				</template>
 			</div>
 		</div>
 	</section>
