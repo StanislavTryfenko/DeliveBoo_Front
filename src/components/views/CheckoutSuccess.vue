@@ -49,7 +49,7 @@ export default {
                     <tbody>
                         <tr class="text-center" v-for="order_item in state.order_resume">
                             <td scope="row">{{ order_item.name }}</td>
-                            <td>{{ order_item.price }}</td>
+                            <td>€ {{ order_item.price }}</td>
                             <td>{{ order_item.quantity }}</td>
                         </tr>
                         <tr class="text-center">
@@ -58,7 +58,7 @@ export default {
                             </td>
                             <td></td>
                             <td>
-                                {{ calculateTotal() }}
+                                € {{ calculateTotal() }}
                             </td>
                         </tr>
                     </tbody>
