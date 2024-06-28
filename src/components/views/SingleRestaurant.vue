@@ -88,7 +88,7 @@ export default {
 		getItemQuantity(itemId) {
 			const item = state.items.find(item => item.id === itemId);
 			return item ? item.quantity : 0;
-		}
+		},
 	}
 };
 </script>
@@ -110,6 +110,12 @@ export default {
 					Carrello</button>
 			</div>
 		</div>
+
+		<div class="modal-backdrop fade show" v-if="showModal"></div>
+
+
+
+
 
 		<!-- vista principale -->
 		<div class="row p-3 shadow-lg">
@@ -196,7 +202,7 @@ export default {
 
 #modalCartError {
 	position: fixed;
-	z-index: 10;
+	z-index: 2000;
 	top: 50vh;
 	left: 50vw;
 	transform: translate(-50%, -50%);

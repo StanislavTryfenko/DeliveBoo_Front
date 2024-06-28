@@ -47,6 +47,7 @@ export default {
 	},
 	mounted() {
 		state.callApi();
+		// console.log(state.restaurants.data.length);
 	}
 } 
 </script>
@@ -87,7 +88,7 @@ export default {
 				</div>
 
 				<!-- ristoranti -->
-				<template v-if="state.restaurants.data.length > 0">
+				<template v-if="state.restaurants.data && state.restaurants.data.length > 0">
 					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 py-3">
 						<div class="col" v-for="restaurant in state.restaurants.data">
 							<router-link
