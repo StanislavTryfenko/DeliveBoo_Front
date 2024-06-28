@@ -26,6 +26,7 @@ export default {
 	methods: {
 		clearCart() {
 			state.items = [];
+			this.saveToLocalStorage();
 		},
 		removeFromCart(itemId) {
 			state.items = state.items.filter(item => item.id !== itemId);
@@ -90,8 +91,7 @@ export default {
 	</header>
 
 
-	<div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="Id2"
-		aria-labelledby="staticBackdropLabel">
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="Id2" aria-labelledby="staticBackdropLabel">
 		<div class="offcanvas-header">
 			<h4 class="offcanvas-title" id="staticBackdropLabel">
 				Il mio Carrello
@@ -134,7 +134,7 @@ export default {
 
 		<div class="offcanvas-footer py-4 d-flex gap-2 justify-content-center" v-if="cart.length > 0">
 			<router-link :to="{ name: 'checkout' }">
-				<button class="btn border rounded checkout text-dark">
+				<button class="btn border rounded checkout text-dark" data-bs-dismiss="offcanvas">
 					Completa l'ordine
 				</button>
 			</router-link>
@@ -161,7 +161,8 @@ export default {
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
 						Annulla
 					</button>
-					<button type="button" class="btn btn-primary" @click="clearCart">Svuota</button>
+					<button type="button" class="btn btn-primary" @click="clearCart"
+						data-bs-dismiss="modal">Svuota</button>
 				</div>
 			</div>
 		</div>

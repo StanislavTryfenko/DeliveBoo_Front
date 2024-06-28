@@ -11,7 +11,7 @@ export default {
 			restaurant: '',
 			single_restaurant_api: 'api/restaurant',
 			baseApiUrl: 'http://127.0.0.1:8000/',
-			showModal: false
+			showModal: false,
 		}
 	},
 	mounted() {
@@ -51,8 +51,8 @@ export default {
 				const existingRestaurantId = state.items[0].restaurant_id;
 				if (existingRestaurantId !== restaurantId) {
 					//apri modale con messaggio che non puoi effettuare tale operazione
-					console.log("Non puoi aggiungere piatti da un ristorante diverso.");
 					this.showModal = true;
+					// console.log("Non puoi aggiungere piatti da un ristorante diverso.");
 					return;
 				}
 			}
@@ -63,27 +63,28 @@ export default {
 			} else {
 				state.items.push({ ...dish, quantity: 1 });
 			}
+			state.cartRestraurantName = this.restaurant.name_restaurant;
 			this.saveToLocalStorage();
 
-			state.cartRestraurantName = this.restaurant.name_restaurant;
-			console.log(state.cartRestraurantName, this.restaurant.name_restaurant);
+			// console.log(state.cartRestraurantName, this.restaurant.name_restaurant);
 		},
 		removeItem(dish) {
 			const index = state.items.findIndex(item => item.id === dish.id);
 			if (index !== -1 && state.items[index].quantity > 1) {
 				state.items[index].quantity--;
-				console.log("hai rimosso il piatto ", dish);
+				// console.log("hai rimosso il piatto ", dish);
 				this.saveToLocalStorage();
 			} else {
 				state.items = state.items.filter(item => item.id !== state.items[index].id);
 				this.saveToLocalStorage();
-				console.log("it's working");
+				// console.log("it's working");
 			}
 		},
 		/* salva gli items in local storage */
 		saveToLocalStorage() {
 			localStorage.setItem("items", JSON.stringify(state.items));
-			console.log("carrello attuale: ", state.items);
+			localStorage.setItem("cartRestaurantName", JSON.stringify(state.cartRestraurantName));
+			// console.log("carrello attuale: ", state.items);
 		},
 		getItemQuantity(itemId) {
 			const item = state.items.find(item => item.id === itemId);
