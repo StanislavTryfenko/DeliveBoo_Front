@@ -41,6 +41,15 @@ export default {
                 <table class="table">
                     <thead>
                         <tr class="text-center">
+                            <td>
+                                <strong>Ristorante:</strong>
+                            </td>
+                            <td>
+                                {{ state.cartRestraurantName }}
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="text-center">
                             <th scope="col">Prodotto</th>
                             <th scope="col">Prezzo unità</th>
                             <th scope="col">Quantità</th>

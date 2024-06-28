@@ -25,6 +25,7 @@ export default {
             error: '',
             state,
             btnDisabled: false,
+            emptyCart: false,
         }
     },
     props: [
@@ -77,22 +78,27 @@ export default {
 
                     /* axios post */
                     if (this.isValid === true) {
-                        axios.post('http://127.0.0.1:8000/api/orders/make/payment', this.form)
-                            .then((response) => {
-                                state.order_resume = state.items
-                                this.clearCart();
-                                console.log(response);
-                                this.$router.push({ name: 'checkout_success' })
-                            })
-                            .catch((error) => {
-                                if (error.message === 'Request failed with status code 422') {
-                                    this.error = 'Controlla il tuo ordine';
-                                } else {
-                                    console.log(error.response.data.message)
-                                    this.error = error.response.data.message;
-                                }
-                                console.log(error)
-                            });
+                        if (state.items.length > 0) {
+
+                            axios.post('http://127.0.0.1:8000/api/orders/make/payment', this.form)
+                                .then((response) => {
+                                    state.order_resume = state.items
+                                    this.clearCart();
+                                    console.log(response);
+                                    this.$router.push({ name: 'checkout_success' })
+                                })
+                                .catch((error) => {
+                                    if (error.message === 'Request failed with status code 422') {
+                                        this.error = 'Controlla il tuo ordine';
+                                    } else {
+                                        console.log(error.response.data.message)
+                                        this.error = error.response.data.message;
+                                    }
+                                    console.log(error)
+                                });
+                        } else {
+                            this.emptyCart = true;
+                        }
                     } else {
                         console.log('Validazione fallita')
                         this.error = 'Hai sbagliato a compilare il form per l\'invio';
@@ -162,6 +168,26 @@ export default {
             setTimeout(() => {
                 this.btnDisabled = false
             }, 5000)
+        },
+        increaseQuantity(item) {
+            item.quantity++;
+            this.saveToLocalStorage();
+        },
+        decreaseQuantity(item) {
+            if (item.quantity > 1) {
+                item.quantity--;
+                this.saveToLocalStorage();
+            } else {
+                this.removeFromCart(item.id);
+            }
+        },
+        removeFromCart(itemId) {
+            state.items = state.items.filter(item => item.id !== itemId);
+            this.saveToLocalStorage();
+        },
+        saveToLocalStorage() {
+            localStorage.setItem("items", JSON.stringify(state.items));
+            console.log("carrello attuale: ", state.items);
         }
     },
     beforeDestroy() {
@@ -213,16 +239,33 @@ export default {
                         <i class="fa-solid fa-arrows-rotate"></i> Invio...
                     </span>
                     <span v-else>
-                        Paga
+                        Completa l'acquisto
                     </span>
                 </button>
             </div>
         </form>
         <div class="col mt-4">
             <h2 class="mb-4">Riepilogo Ordine</h2>
+            <div class="text-danger p-4 border boreder-danger rounded text-center" v-if="emptyCart">
+                Non puoi completare l'ordine, il carrello è vuoto!
+                <div>
+                    <router-link :to="{ name: 'home' }" class="no_style">
+                        <span class="btn btn-primary btn-sm mt-3">Ritorna alla home</span>
+                    </router-link>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
+                        <tr class="text-center">
+                            <td>
+                                <strong>Ristorante:</strong>
+                            </td>
+                            <td>
+                                {{ state.cartRestraurantName }}
+                            </td>
+                            <td></td>
+                        </tr>
                         <tr class="text-center">
                             <th scope="col">Prodotto</th>
                             <th scope="col">Prezzo</th>
@@ -233,7 +276,15 @@ export default {
                         <tr class="text-center" v-for="order_item in state.items">
                             <td scope="row">{{ order_item.name }}</td>
                             <td>€ {{ order_item.price }}</td>
-                            <td>{{ order_item.quantity }}</td>
+                            <td>
+                                <div class="btn rounded border" @click="decreaseQuantity(order_item)">
+                                    <i class="fa-solid fa-minus"></i>
+                                </div>
+                                {{ order_item.quantity }}
+                                <div class="btn rounded border" @click="increaseQuantity(order_item)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="text-center">
                             <td>
@@ -253,4 +304,9 @@ export default {
 
 </template>
 
-<style></style>
+<style>
+.no_style {
+    text-decoration: none;
+    color: inherit;
+}
+</style>

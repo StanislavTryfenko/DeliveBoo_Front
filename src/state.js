@@ -19,12 +19,15 @@ export const state = reactive(initialState);
 /* carica local storage all'avvio */
 const loadFromLocalStorage = () => {
 	const storedItems = JSON.parse(localStorage.getItem("items"));
+	const storeCartRestaurantName = JSON.parse(localStorage.getItem("cartRestaurantName"));
 	state.items = storedItems ? storedItems : [];
+	state.cartRestraurantName = storeCartRestaurantName ? storeCartRestaurantName : [];
 };
 
 /* salva item in local storage */
 const saveToLocalStorage = () => {
 	localStorage.setItem("items", JSON.stringify(state.items));
+	localStorage.setItem("cartRestaurantName", JSON.stringify(state.cartRestraurantName));
 };
 
 /* calcola il totale del carrello */
