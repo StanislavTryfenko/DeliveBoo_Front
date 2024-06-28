@@ -11,7 +11,8 @@ export default {
 			restaurant: '',
 			single_restaurant_api: 'api/restaurant',
 			baseApiUrl: 'http://127.0.0.1:8000/',
-			showModal: false
+			showModal: false,
+			user: '',
 		}
 	},
 	mounted() {
@@ -29,11 +30,13 @@ export default {
 				.then(response => {
 					/* console.log(state.base_api + this.single_restaurant_api + `/${id}`); */
 					if (response.data.success) {
-						/* console.log(response.data); */
+						// console.log(response.data);
 						this.restaurant = response.data.restaurant;
 						this.dishes = this.restaurant.dishes;
 						// console.log("ristorante selezionato:", this.restaurant);
 						// console.log("dishes caricati:", this.dishes);
+						this.user = this.restaurant.user
+						// console.log(this.user);
 					} else {
 						this.$router.push({ name: 'not-found' })
 					}
@@ -140,7 +143,7 @@ export default {
 
 				<p><i class="fa-solid fa-phone"></i> {{ restaurant.phone_number }}</p>
 				<p><i class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
-				<p><i class="fa-solid fa-envelope"></i> {{ restaurant.contact_email }}</p>
+				<p><i class="fa-solid fa-envelope"></i> {{ user.email }}</p>
 
 			</div>
 		</div>
