@@ -21,7 +21,7 @@ export default {
 		/* console.log('progetto:', this.project); */
 		//console.log(this.restaurant);
 		//console.log(this.baseApiUrl);
-		console.log("tutte le tipologie", this.restaurant.types);
+		/* console.log("tutte le tipologie", this.restaurant.types); */
 	},
 	computed: {
 		/* limita i badge in vista per non rompere l'altezza delle card */
