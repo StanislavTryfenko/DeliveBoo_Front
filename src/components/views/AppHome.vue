@@ -43,24 +43,77 @@ export default {
 		resetFilters() {
 			this.typesList = [];
 			state.callApi();
+		},
+		/* search bar */
+		addType() {
+			const typeName = this.searchQuery.trim().toLowerCase();
+			const type = state.types.find(t => t.name.toLowerCase() === typeName);
+			if (type && !this.typesList.includes(type.id)) {
+				this.typesList.push(type.id);
+				this.searchQuery = '';
+				this.callFilters();
+			}
+		},
+		handleConfirm() {
+			/* conferma tramite pulsante se search query corrispone ad un type esistente */
+			this.addType();
 		}
 	},
 	mounted() {
 		state.callApi();
+	},
+	computed: {
+		filteredTypes() {
+			const query = this.searchQuery.trim().toLowerCase();
+			if (query) {
+				return state.types.filter(type => type.name.toLowerCase().includes(query));
+			}
+			return [];
+		}
 	}
 } 
 </script>
 
 <template>
 	<!-- jumbotron with search bar -->
-	<section id="my_jumbotron">
-		<!-- <div class="container-fluid text-center h-100 py-5">
+	<section id="my_jumbotron" loading="eager">
+		<div class="container-fluid text-center h-100 py-5">
 			<div class="row h-100 justify-content-center align-items-end">
 				<div class="col-6 col-md-8 d-flex justify-content-center" id="search_card">
-
+					<div class="card align-items-center py-5 mb-4 rounded-5 gap-2 shadow-lg">
+						<!-- caption -->
+						<h1>Tutto il gusto che ami, a casa tua</h1>
+						<p class="fs-4 lh-sm d-none d-sm-block">
+							Gusta la qualità del tuo ristorante preferito, senza lasciare il comfort di casa
+						</p>
+						<!-- search bar -->
+						<div
+							class="col d-flex justify-content-between border rounded-pill p-1 shadow-sm mb-2 position-relative">
+							<div class="px-2 d-flex align-items-center flex-grow-1" id="search_bar">
+								<i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
+								<input type="text" name="types.name" id="types.name" placeholder=" Cerca Categoria"
+									class="border-0 py-3 px-2 flex-grow-1" v-model="searchQuery"
+									@keydown.enter.prevent="handleConfirm">
+							</div>
+							<button type="submit" class="rounded-pill fw-bold border-0 px-4" @click="handleConfirm">
+								conferma
+							</button>
+							<!-- computed results -->
+							<div v-if="filteredTypes.length > 0"
+								class="position-absolute w-100 bg-white shadow-sm rounded"
+								style="z-index: 1000; margin-top: 4rem;">
+								<ul class="list-unstyled m-0 p-4">
+									<li v-for="type in filteredTypes" :key="type.id" @click="addType(type)"
+										class="p-2 border-bottom table-hover" style="cursor: pointer;">
+										{{ type.name }}
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
 	</section>
 
 	<!-- vista principale -->
@@ -112,13 +165,13 @@ export default {
 @import '../../assets/scss/variables.scss';
 
 #my_jumbotron {
-	height: 300px;
+	height: 650px;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-image: url("src/assets/img/jumbo-food-2.jpg");
 
-	@media(max-width: 768px) {
-		height: 450px;
+	@media(max-width: 767px) {
+		height: 425px;
 	}
 
 	@media(min-width: 1024px) {
@@ -129,7 +182,7 @@ export default {
 
 	#search_card {
 		.card {
-			min-width: 350px;
+			min-width: 400px;
 		}
 	}
 
