@@ -21,6 +21,6 @@ export default {
 
 <style>
 main {
-	margin-top: 3rem
+	margin-top: 4rem
 }
 </style>

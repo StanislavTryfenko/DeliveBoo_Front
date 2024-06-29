@@ -30,23 +30,21 @@ export default {
 <template>
 	<header id="my_header">
 		<div class="container">
-			<div class="row justify-content-between align-items-center py-2">
+			<div class="row justify-content-between align-items-center py-3">
 				<div class="col d-flex justify-content-start">
 					<router-link :to="{ name: 'home' }" class="no_style">
 						<span class="fs-5 fw-bold">DeliveBoo</span>
 					</router-link>
 
 				</div>
-				<div class="col d-flex gap-3 justify-content-end align-items-center">
-					<!-- <router-link v-for="link in menu" :to="{ name: link.route }">
-						<i :class="link.icon"></i>
-					</router-link> -->
-					<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#my_offcanvas"
-						aria-controls="my_offcanvas">
-						<i class="fa-solid fa-cart-shopping">
+				<div class="col d-flex gap-4 justify-content-end align-items-center ">
+					<button class="btn p-0 position-relative" type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#my_offcanvas" aria-controls="my_offcanvas">
+						<i class="fa-solid fa-basket-shopping">
 							<ShoppingCart />
 						</i>
-						<span class="text-light ms-2">
+						<span
+							class="text-light ms-2 position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-secondary">
 							{{ state.dishesTotal() }}
 						</span>
 					</button>
@@ -63,6 +61,11 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/variables.scss';
 
+.no_style {
+	text-decoration: none;
+	color: inherit;
+}
+
 #my_header {
 	background-color: $primary;
 	color: white;
@@ -78,8 +81,5 @@ export default {
 	}
 }
 
-.no_style {
-	text-decoration: none;
-	color: inherit;
-}
+#my_cart_icon {}
 </style>

@@ -32,7 +32,7 @@ export default {
 						/* console.log(response.data); */
 						this.restaurant = response.data.restaurant;
 						this.dishes = this.restaurant.dishes;
-						// console.log("ristorante selezionato:", this.restaurant);
+						console.log("ristorante selezionato:", this.restaurant);
 						// console.log("dishes caricati:", this.dishes);
 					} else {
 						this.$router.push({ name: 'not-found' })
@@ -97,17 +97,20 @@ export default {
 	<div class="container-fluid">
 
 		<!-- modale errore -->
-
-		<div class="row w-75 h-25 justify-content-center py-4 border rounded border-secondary bg-light" v-if="showModal"
-			id="modalCartError">
-			<div class="row d-flex justify-content-around align-items-center">
-				<h4 class="text-center col-12">Puoi ordinare da un solo ristorante!</h4>
-				<button class="btn btn-light text-primary col-sm-6 col-md-3" @click="this.showModal = false">Continua
-					col tuo
-					ordine</button>
-				<button type="button" class="btn btn-light text-danger col-sm-6 col-md-3"
-					@click="clearAndClose()">Svuota
-					Carrello</button>
+		<div class="container" v-if="showModal">
+			<div class="row justify-content-center py-4 border rounded border-secondary bg-light" id="modalCartError">
+				<div class="col-12">
+					<h4 class="text-center">Puoi ordinare da un solo ristorante!</h4>
+				</div>
+				<div class="col-6 d-flex gap-2 justify-content-center py-4">
+					<button class="btn border-primary border border-2 rounded text-primary fw-medium "
+						@click="this.showModal = false">
+						Continua
+					</button>
+					<button type="button" class="btn border border-2 border-danger text-danger fw-medium"
+						@click="clearAndClose()">Svuota il
+						Carrello</button>
+				</div>
 			</div>
 		</div>
 
@@ -122,25 +125,26 @@ export default {
 
 			<!-- restaurant dashboard -->
 			<div class="col-12 col-sm-4 py-3">
-				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
-					:alt="restaurant.name_restaurant" class="card-img-top my_card_img img-thumbnail">
-				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant"
-					class="card-img-top img-thumbnail">
+				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
+					class="card-img">
+				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant">
 			</div>
-			<div class="col-8 py-3">
+			<div class="col-12 col-md-8 py-3">
 				<h2>{{ restaurant.name_restaurant }}</h2>
 				<ul class="list-inline mb-5">
 					<li v-for="type in restaurant.types" class="list-inline-item">{{ type.name }};</li>
 				</ul>
-				<div class="d-flex align-items-center gap-2 text-secondary">
+
+				<!-- informazioni -->
+				<div class="d-flex align-items-center gap-2 text-secondary mb-2">
 					<i class="fa-solid fa-circle-info"></i>
 					<span class="fs-5">Informazioni</span>
 				</div>
-				<p class="fs-3">{{ restaurant.description }}</p>
-
-				<p><i class="fa-solid fa-phone"></i> {{ restaurant.phone_number }}</p>
-				<p><i class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
-				<p><i class="fa-solid fa-envelope"></i> {{ restaurant.contact_email }}</p>
+				<div id="restaurant_info">
+					<p><i class="fa-solid fa-phone"></i> {{ restaurant.phone_number }}</p>
+					<p><i class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
+					<p><i class="fa-solid fa-envelope"></i> {{ restaurant.contact_email }}</p>
+				</div>
 
 			</div>
 		</div>
@@ -151,35 +155,31 @@ export default {
 				<h4>MENU</h4>
 			</div>
 			<div class="col-12 col-md-6 g-4" v-for="dish in restaurant.dishes">
-				<div class="card p-3 m-2 h-100">
-					<div class="row">
-						<div class="col-6 col-md-9 px-3 py-1">
-							<h5>
-								{{ dish.name }}
-							</h5>
-							<p class="mb-1">€ {{ dish.price }}</p>
-							<p class="mb-1"> {{ dish.description }}</p>
-							<br>
-							<!-- stato del carrello -->
-							<div class="d-flex gap-2">
-								<button class="btn rounded border" @click="removeItem(dish)">
-									<i class="fa-solid fa-minus"></i>
-								</button>
-								<div class="border rounded text-center p-1 px-3" style="vertical-align: middle;">
-									{{ getItemQuantity(dish.id) }}
-								</div>
-								<button class="btn rounded border" @click="addItem(dish)">
-									<i class="fa-solid fa-plus"></i>
-								</button>
-							</div>
+				<div class="card py-1 px-3 h-100">
+					<div class="row h-100 align-items-center">
+						<div class="col-6 col-md-8 col-xxl-9 px-3 py-1 align-items-around" id="dish_info">
+							<h5>{{ dish.name }}</h5>
+							<p class="text-secondary lh-sm dish_clamp"> {{ dish.description }}</p>
 						</div>
-
-
-						<div class="col-6 col-md-3 align-self-center">
-							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
-								:alt="restaurant.name_restaurant" class="card-img my_card_img">
-							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
+						<div class="col-6 col-md-4 col-xxl-3 align-self-center p-1">
+							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
 								class="card-img">
+							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">
+						</div>
+						<!-- stato del carrello -->
+						<div class="col-12 d-flex gap-2 mb-1" id="dish_btn">
+							<button class="btn rounded border" @click="removeItem(dish)">
+								<i class="fa-solid fa-minus" :class="{ disable_btn: state.items.length === 0 }"></i>
+							</button>
+							<div class="border rounded text-center p-1 px-3" style="vertical-align: middle;">
+								{{ getItemQuantity(dish.id) }}
+							</div>
+							<button class="btn rounded border" @click="addItem(dish)">
+								<i class="fa-solid fa-plus"></i>
+							</button>
+							<div class="align-self-center">
+								<span class="fw-medium" style="white-space: nowrap;">€ {{ dish.price }}</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -194,19 +194,51 @@ export default {
 	color: inherit;
 }
 
-#modalCartError {
-	position: fixed;
-	z-index: 10;
-	top: 50vh;
-	left: 50vw;
-	transform: translate(-50%, -50%);
-	width: 60%;
-	height: 20%;
-}
-
 img {
 	width: 80%;
 	aspect-ratio: 1;
 	object-fit: cover
+}
+
+#modalCartError {
+	position: fixed;
+	z-index: 10;
+	top: 40vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+}
+
+#restaurant_info {
+	p {
+		margin-bottom: 0.5rem;
+	}
+}
+
+.disable_btn {
+	color: lightgray;
+}
+
+.dish_clamp {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	@media(max-width: 425px) {
+		-webkit-line-clamp: 7;
+	}
+}
+
+#dish_btn {
+	@media(max-width: 425px) {
+		flex-wrap: wrap;
+	}
+}
+
+#dish_info {
+	@media(max-width: 425px) {
+		padding: 0 0.25rem 0 0.25rem !important;
+	}
 }
 </style>
