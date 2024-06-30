@@ -95,9 +95,9 @@ export default {
 							class="col d-flex justify-content-between border rounded-pill p-1 shadow-sm mb-2 position-relative">
 							<div class="px-2 d-flex align-items-center flex-grow-1" id="search_bar">
 								<i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
-								<input type="text" name="types.name" id="types.name" placeholder=" Cerca Categoria"
-									class="border-0 py-3 px-2 flex-grow-1" v-model="searchQuery"
-									@keydown.enter.prevent="handleConfirm">
+								<input type="text" autocomplete="off" name="types.name" id="types.name"
+									placeholder=" Cerca Categoria" class="border-0 py-3 px-2 flex-grow-1"
+									v-model="searchQuery" @keydown.enter.prevent="handleConfirm">
 							</div>
 							<button type="submit" class="rounded-pill fw-bold border-0 px-4" @click="handleConfirm">
 								conferma
@@ -167,6 +167,11 @@ export default {
 
 <style lang="scss">
 @import '../../assets/scss/variables.scss';
+
+input[type="text"] {
+	border: none;
+	outline: none;
+}
 
 #my_jumbotron {
 	height: 650px;

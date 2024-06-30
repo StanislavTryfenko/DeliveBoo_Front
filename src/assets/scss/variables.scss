@@ -1,6 +1,28 @@
 /* colors */
 $primary: #EC4E00;
-$secondary: #eecc91;
+/* $secondary: #eecc91; */
+$secondary: #c5ac00;
+/* $tertiary: #c2beb8; */
+$tertiary: #ba3a38;
+$lighter: #e4e0da;
 
 /* fonts */
 $header: 'Josefin Sans', sans-serif;
+
+.btn_secondary {
+	background-color: $secondary;
+	color: white;
+	font-weight: 500;
+	font-size: 18px;
+	border: none;
+	height: 40px;
+}
+
+.btn_tertiary {
+	background-color: $tertiary;
+	color: white;
+	font-weight: 500;
+	font-size: 18px;
+	border: none;
+	height: 40px;
+}

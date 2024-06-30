@@ -231,7 +231,7 @@ export default {
 		<div class="accordion" id="my_accordion">
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button fs-5 fw-medium" type="button" data-bs-toggle="collapse"
+					<button class="accordion-button fs-5 fw-medium text-white" type="button" data-bs-toggle="collapse"
 						data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 						Riepilogo Ordine
 					</button>
@@ -288,6 +288,21 @@ export default {
 		margin: 0;
 		font-size: 14px;
 	}
+}
+
+#my_accordion {
+	color: white;
+
+	.accordion-button {
+		color: white;
+		background-color: $primary;
+	}
+
+	.accordion-button::after {
+		color: white;
+	}
+
+	$accordion-icon-color: white;
 }
 
 /* braintree native */

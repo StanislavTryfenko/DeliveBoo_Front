@@ -65,7 +65,9 @@ export default {
 			}
 			this.saveToLocalStorage();
 
+			/* nome ristorante */
 			state.cartRestraurantName = this.restaurant.name_restaurant;
+			localStorage.setItem("cartRestaurantName", this.restaurant.name_restaurant);
 			console.log(state.cartRestraurantName, this.restaurant.name_restaurant);
 		},
 		removeItem(dish) {
@@ -97,25 +99,26 @@ export default {
 	<div class="container-fluid">
 
 		<!-- modale errore -->
-		<div class="container" v-if="showModal">
-			<div class="row justify-content-center py-4 border rounded border-secondary bg-light" id="modalCartError">
-				<div class="col-12">
-					<h4 class="text-center">Puoi ordinare da un solo ristorante!</h4>
+		<div class="container shadow-lg" v-if="showModal">
+			<div class="row justify-content-center border py-4 rounded bg-light" id="modalCartError">
+				<div class="col-12 modal_header">
+					<h3>Puoi ordinare da un solo ristorante!</h3>
 				</div>
-				<div class="col-6 d-flex gap-2 justify-content-center py-4">
-					<button class="btn border-primary border border-2 rounded text-primary fw-medium "
-						@click="this.showModal = false">
+				<div class="col-12 modal_body">
+					<!-- img -->
+				</div>
+				<div class="col-12 d-flex gap-2 justify-content-end pt-3">
+					<button type="button" class="btn rounded-pill " @click="this.showModal = false">
 						Continua
 					</button>
-					<button type="button" class="btn border border-2 border-danger text-danger fw-medium"
-						@click="clearAndClose()">Svuota il
+					<button type="button" class="btn btn_tertiary rounded-pill" @click="clearAndClose()">Svuota il
 						Carrello</button>
 				</div>
 			</div>
 		</div>
 
 		<!-- vista principale -->
-		<div class="row p-3 shadow-lg">
+		<div class="row p-3 shadow-lg" id="my_single_restaurant">
 			<div class="col-12 py-1">
 				<router-link :to="{ name: 'home' }" class="no_style text-secondary px-1">
 					<i class="fa-solid fa-arrow-left"></i>
@@ -125,8 +128,8 @@ export default {
 
 			<!-- restaurant dashboard -->
 			<div class="col-12 col-sm-4 py-3">
-				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
-					class="card-img">
+				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
+					:alt="restaurant.name_restaurant" class="card-img">
 				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant">
 			</div>
 			<div class="col-12 col-md-8 py-3">
@@ -162,9 +165,10 @@ export default {
 							<p class="text-secondary lh-sm dish_clamp"> {{ dish.description }}</p>
 						</div>
 						<div class="col-6 col-md-4 col-xxl-3 align-self-center p-1">
-							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
+							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
+								:alt="restaurant.name_restaurant" class="card-img">
+							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
 								class="card-img">
-							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">
 						</div>
 						<!-- stato del carrello -->
 						<div class="col-12 d-flex gap-2 mb-1" id="dish_btn">
@@ -188,7 +192,9 @@ export default {
 	</div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '../../assets/scss/variables.scss';
+
 .no_style {
 	text-decoration: none;
 	color: inherit;
@@ -200,12 +206,45 @@ img {
 	object-fit: cover
 }
 
+#my_single_restaurant {
+	background-image: url('../../assets/img/restaurant.jpg');
+	background-position: bottom 0 right 20%;
+	background-size: 700px auto;
+	background-repeat: no-repeat;
+}
+
 #modalCartError {
 	position: fixed;
 	z-index: 10;
 	top: 40vh;
 	left: 50vw;
 	transform: translate(-50%, -50%);
+	width: 700px;
+	background-color: $lighter !important;
+	/* 	background-color: white; */
+
+	.modal_header {
+		/* background-color: white; */
+
+		h3 {
+			font-family: $header;
+			font-weight: 800;
+			color: $primary;
+		}
+	}
+
+	.modal_body {
+		height: 300px;
+		width: 100%;
+		background-image: url('../../assets/img/order_food2.jpg');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+	}
+
+	.modal_footer {
+		/* background-color: white; */
+	}
+
 }
 
 #restaurant_info {
