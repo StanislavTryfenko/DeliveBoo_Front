@@ -179,31 +179,31 @@ export default {
 	<div class="d-flex align-items-center flex-column p-3">
 		<h2 class="mb-4">Pagamento</h2>
 		<!-- dati cliente -->
-		<form @submit.prevent="onSubmit" @submit="submitPayment" class="container">
+		<form @submit.prevent="onSubmit" @submit="submitPayment" class="container" id="my_payment_form">
 			<div class="row row-cols-1 row-cols-md-2">
 				<div class="col">
-					<div class="mb-3">
-						<label for="customerName" class="form-label"><strong>Nome: *</strong></label>
+					<div class="mb-2">
+						<label for="customerName" class="form-label">Nome*</label>
 						<input id="customerName" class="d-block w-100" type="text" v-model="form.customerName"
 							placeholder="Mario" />
 					</div>
-					<div class="mb-3">
-						<label for="customerLastName" class="form-label"><strong>Cognome: *</strong></label>
+					<div class="mb-2">
+						<label for="customerLastName" class="form-label">Cognome*</label>
 						<input id="customerLastName" class="d-block w-100" type="text" v-model="form.customerLastName"
 							placeholder="Rossi" />
 					</div>
-					<div class="mb-3">
-						<label for="customerEmail" class="form-label"><strong>Email: *</strong></label>
+					<div class="mb-2">
+						<label for="customerEmail" class="form-label">Email*</label>
 						<input id="customerEmail" class="d-block w-100" type="text" v-model="form.customerEmail"
 							placeholder="mariorossi@email.com" />
 					</div>
-					<div class="mb-3">
-						<label for="customerPhoneNumber" class="form-label"><strong>Cellulare: *</strong></label>
-						<input id="customerPhoneNumber" class="d-block w-100" type="tel" v-model="form.customerPhoneNumber"
-							placeholder="1234567890" />
+					<div class="mb-2">
+						<label for="customerPhoneNumber" class="form-label">Cellulare*</label>
+						<input id="customerPhoneNumber" class="d-block w-100" type="tel"
+							v-model="form.customerPhoneNumber" placeholder="1234567890" />
 					</div>
-					<div class="mb-3">
-						<label for="customerAddress" class="form-label"><strong>Indirizzo: *</strong></label>
+					<div class="mb-2">
+						<label for="customerAddress" class="form-label">Indirizzo*</label>
 						<input id="customerAddress" class="d-block w-100" type="text" v-model="form.customerAddress"
 							placeholder="Via del Corso 10" />
 					</div>
@@ -213,11 +213,12 @@ export default {
 				<div id="dropin-container"></div>
 
 				<!-- bottone pagamento -->
-				<button type="submit" class="btn btn-primary mx-auto px-5" :disabled="btnDisabled"><span v-if="btnDisabled">
+				<button type="submit" class="btn btn-primary mx-auto px-5 mt-3" :disabled="btnDisabled"><span
+						v-if="btnDisabled">
 						<i class="fa-solid fa-arrows-rotate"></i> Invio...
 					</span>
 					<span v-else>
-						Paga
+						Procedi con il pagamento
 					</span>
 				</button>
 
@@ -227,7 +228,7 @@ export default {
 
 	<!-- riepilogo ordine -->
 	<div class="container py-4 mb-5">
-		<div class="accordion" id="accordionExample">
+		<div class="accordion" id="my_accordion">
 			<div class="accordion-item">
 				<h2 class="accordion-header">
 					<button class="accordion-button fs-5 fw-medium" type="button" data-bs-toggle="collapse"
@@ -235,7 +236,7 @@ export default {
 						Riepilogo Ordine
 					</button>
 				</h2>
-				<div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+				<div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#my_accordion">
 					<div class="accordion-body">
 						<div class="table-responsive">
 							<table class="table">
@@ -272,4 +273,25 @@ export default {
 
 </template>
 
-<style></style>
+<style lang="scss">
+@import '../../assets/scss/variables.scss';
+
+#my_payment_form {
+	input {
+		height: 42px;
+		padding: 0 8px 0 8px;
+		margin: 4px 0 0 0;
+		border: 1px solid #bfbfbf;
+	}
+
+	label {
+		margin: 0;
+		font-size: 14px;
+	}
+}
+
+/* braintree native */
+.braintree-sheet__content--form .braintree-form__flexible-fields {
+	display: block;
+}
+</style>

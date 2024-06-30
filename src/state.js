@@ -11,6 +11,7 @@ const initialState = {
 	items: [],
 	order_resume: [],
 	cartRestraurantName: '',
+	toggle: false
 };
 
 

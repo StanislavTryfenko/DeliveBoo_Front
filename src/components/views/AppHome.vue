@@ -3,6 +3,7 @@ import axios from 'axios';
 import RestaurantCard from '../partials/RestaurantCard.vue';
 import { state } from '../../state';
 
+
 export default {
 	name: "AppHome",
 	components: {
@@ -77,6 +78,7 @@ export default {
 </script>
 
 <template>
+
 	<!-- jumbotron with search bar -->
 	<section id="my_jumbotron" loading="eager">
 		<div class="container-fluid text-center h-100 py-5">
@@ -89,17 +91,20 @@ export default {
 							Gusta la qualità del tuo ristorante preferito, senza lasciare il comfort di casa
 						</p>
 						<!-- search bar -->
-						<div class="col d-flex justify-content-between border rounded-pill p-1 shadow-sm mb-2 position-relative">
+						<div
+							class="col d-flex justify-content-between border rounded-pill p-1 shadow-sm mb-2 position-relative">
 							<div class="px-2 d-flex align-items-center flex-grow-1" id="search_bar">
 								<i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
 								<input type="text" name="types.name" id="types.name" placeholder=" Cerca Categoria"
-									class="border-0 py-3 px-2 flex-grow-1" v-model="searchQuery" @keydown.enter.prevent="handleConfirm">
+									class="border-0 py-3 px-2 flex-grow-1" v-model="searchQuery"
+									@keydown.enter.prevent="handleConfirm">
 							</div>
 							<button type="submit" class="rounded-pill fw-bold border-0 px-4" @click="handleConfirm">
 								conferma
 							</button>
 							<!-- computed results -->
-							<div v-if="filteredTypes.length > 0" class="position-absolute w-100 bg-white shadow-sm rounded"
+							<div v-if="filteredTypes.length > 0"
+								class="position-absolute w-100 bg-white shadow-sm rounded"
 								style="z-index: 1000; margin-top: 4rem;">
 								<ul class="list-unstyled m-0 p-4">
 									<li v-for="type in filteredTypes" :key="type.id" @click="addType(type)"
@@ -129,8 +134,9 @@ export default {
 
 							<label :for="'type-' + type.id" class="d-flex align-items-center m-1"
 								:class="{ 'active_filter': typesList.includes(type.id) }">
-								<input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters" type="checkbox"
-									:value="type.id" :id="'type-' + type.id" v-model="typesList" @change="callFilters" />
+								<input name="typesList" class="fs-6 p-1 me-2 hidden-checkbox managing-filters"
+									type="checkbox" :value="type.id" :id="'type-' + type.id" v-model="typesList"
+									@change="callFilters" />
 								{{ type.name }}
 							</label>
 						</div>
@@ -141,7 +147,8 @@ export default {
 				<template v-if="state.restaurants.data && state.restaurants.data.length > 0">
 					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 py-3">
 						<div class="col" v-for="restaurant in state.restaurants.data">
-							<router-link :to="{ name: 'restaurant', params: { id: restaurant.id, slug: restaurant.slug } }"
+							<router-link
+								:to="{ name: 'restaurant', params: { id: restaurant.id, slug: restaurant.slug } }"
 								class="no_style">
 								<RestaurantCard :restaurant="restaurant" :baseApiUrl="state.base_api" />
 							</router-link>
