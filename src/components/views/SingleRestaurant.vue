@@ -99,19 +99,19 @@ export default {
 	<div class="container-fluid">
 
 		<!-- modale errore -->
-		<div class="container shadow-lg" v-if="showModal">
-			<div class="row justify-content-center border py-4 rounded bg-light" id="modalCartError">
-				<div class="col-12 modal_header">
-					<h3>Puoi ordinare da un solo ristorante!</h3>
+		<div class="container" v-if="showModal">
+			<div class="row justify-content-center py-3 shadow-lg border rounded bg-light" id="modalCartError">
+				<div class="col-12 modal_header pb-3">
+					<h3 class="text-center">Puoi ordinare da un solo ristorante!</h3>
 				</div>
 				<div class="col-12 modal_body">
 					<!-- img -->
 				</div>
-				<div class="col-12 d-flex gap-2 justify-content-end pt-3">
-					<button type="button" class="btn rounded-pill " @click="this.showModal = false">
+				<div class="col-12 modal_footer d-flex gap-2 justify-content-end pt-3">
+					<button type="button" class="btn btn_secondary_light rounded-pill " @click="this.showModal = false">
 						Continua
 					</button>
-					<button type="button" class="btn btn_tertiary rounded-pill" @click="clearAndClose()">Svuota il
+					<button type="button" class="btn btn_tertiary_light rounded-pill" @click="clearAndClose()">Svuota il
 						Carrello</button>
 				</div>
 			</div>
@@ -127,9 +127,9 @@ export default {
 			</div>
 
 			<!-- restaurant dashboard -->
-			<div class="col-12 col-sm-4 py-3">
-				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
-					:alt="restaurant.name_restaurant" class="card-img">
+			<div class="col-12 col-md-4 py-3">
+				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
+					class="card-img" style="width: 100%; height: auto;">
 				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant">
 			</div>
 			<div class="col-12 col-md-8 py-3">
@@ -165,10 +165,9 @@ export default {
 							<p class="text-secondary lh-sm dish_clamp"> {{ dish.description }}</p>
 						</div>
 						<div class="col-6 col-md-4 col-xxl-3 align-self-center p-1">
-							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
-								:alt="restaurant.name_restaurant" class="card-img">
-							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
+							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
 								class="card-img">
+							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">
 						</div>
 						<!-- stato del carrello -->
 						<div class="col-12 d-flex gap-2 mb-1" id="dish_btn">
@@ -206,46 +205,61 @@ img {
 	object-fit: cover
 }
 
-#my_single_restaurant {
-	background-image: url('../../assets/img/restaurant.jpg');
-	background-position: bottom 0 right 20%;
-	background-size: 700px auto;
-	background-repeat: no-repeat;
-}
+/* #my_single_restaurant {
+	@media(min-width:758px) {
+		background-image: url('../../assets/img/restaurant2.jpg');
+		background-position: bottom 0 right 10%;
+		background-size: 30% auto;
+		background-repeat: no-repeat;
+	}
+} */
 
 #modalCartError {
 	position: fixed;
 	z-index: 10;
-	top: 40vh;
+	top: 50vh;
 	left: 50vw;
 	transform: translate(-50%, -50%);
-	width: 700px;
-	background-color: $lighter !important;
-	/* 	background-color: white; */
+	width: 70vw;
+	max-width: 700px;
 
 	.modal_header {
-		/* background-color: white; */
+		vertical-align: middle;
 
 		h3 {
 			font-family: $header;
-			font-weight: 800;
-			color: $primary;
+			font-weight: 900;
+			color: $tertiary;
 		}
 	}
 
 	.modal_body {
 		height: 300px;
-		width: 100%;
-		background-image: url('../../assets/img/order_food2.jpg');
+
+		width: 100vw;
+		background-image: url('../../assets/img/order_food3.jpg');
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 	}
 
-	.modal_footer {
-		/* background-color: white; */
-	}
+	.modal_footer {}
 
 }
+
+@media(max-width: 426px) {
+	#modalCartError {
+		.modal_body {
+			display: none;
+		}
+	}
+}
+
+/* @media(max-width:425px) {
+	#modalCartError {
+		width: 400px;
+	}
+
+} */
 
 #restaurant_info {
 	p {
