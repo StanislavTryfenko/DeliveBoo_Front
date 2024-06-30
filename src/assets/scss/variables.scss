@@ -18,9 +18,27 @@ $header: 'Josefin Sans', sans-serif;
 	height: 40px;
 }
 
+.btn_secondary_light {
+	border: 1px solid $secondary !important;
+	color: $secondary;
+	font-weight: 500;
+	font-size: 18px;
+	border: none;
+	height: 40px;
+}
+
 .btn_tertiary {
 	background-color: $tertiary;
 	color: white;
+	font-weight: 500;
+	font-size: 18px;
+	border: none;
+	height: 40px;
+}
+
+.btn_tertiary_light {
+	border: 1px solid $tertiary !important;
+	color: $tertiary;
 	font-weight: 500;
 	font-size: 18px;
 	border: none;

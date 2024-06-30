@@ -39,7 +39,7 @@ export default {
 	<div class="card card_style rounded-1 mb-4" id="restaurant_card">
 
 		<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
-			class="card-img-top">
+			class="card-img-top border">
 		<img v-else src="https://placehold.co/200x100" :alt="restaurant.name_restaurant" class="card-img-top">
 
 		<div class="card-body align-self-center">
