@@ -60,7 +60,22 @@ export default {
 		handleConfirm() {
 			/* conferma tramite pulsante se search query corrispone ad un type esistente */
 			this.addType();
-		}
+		},
+		goTo(pageNumber) {
+			axios
+				.get(state.base_api + state.restaurants_api + `?page=${pageNumber}`) //ricordati che con  i backtick puoi utilizzare stringhe e variabili insieme con l'utilizzo del ${}
+
+				.then((response) => {
+					//quando ottengo response, svolgo la funzione
+					console.log(response.data);
+					state.restaurants = response.data.restaurants; //salvo nell'array dichiarato in data, il risultato ottenuto dalla chiamata ajax
+					//console.log( this.projectList);
+				})
+				.catch((error) => {
+					console.error("Errore durante la chiamata API:", error);
+				}); //aggiungo la catach per la gestione degli errori
+		},
+
 	},
 	mounted() {
 		state.callApi();
@@ -154,6 +169,18 @@ export default {
 							</router-link>
 						</div>
 					</div>
+
+					<!-- Pagination -->
+
+					<nav aria-label="..." class="mt-3">
+						<ul class="pagination pagination-lg">
+							<li class="page-item pagination_navigation_button"
+								v-for="pageNumber in state.restaurants.last_page" @click="goTo(pageNumber)">
+								<!--ricordati che non puoi mettere direttamente i tuoi elementi in un array, perchè altrimenti non puoi accedere alle altre proprietà .)-->
+								<a class="page-link">{{ pageNumber }}</a>
+							</li>
+						</ul>
+					</nav>
 				</template>
 				<template v-else>
 					<h2 class="text-center mt-5 pt-5 text-secondary">
@@ -243,5 +270,9 @@ input[type="text"] {
 .active_filter {
 	background-color: $primary;
 	color: white;
+}
+
+.pagination_navigation_button {
+	cursor: pointer;
 }
 </style>
