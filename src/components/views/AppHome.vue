@@ -183,9 +183,11 @@ export default {
 					</nav>
 				</template>
 				<template v-else>
-					<h2 class="text-center mt-5 pt-5 text-secondary">
-						Nessun ristorante soddisfa questa ricerca
-					</h2>
+					<h3 class="text-center mt-4 text-secondary">
+						Nessun ristorante soddisfa la tua ricerca
+					</h3>
+					<img src="../../assets/img/empty_cart.png" alt="no restaurant found" class="mx-auto py-1 pe-2"
+						style="width: 25%; height: auto; min-width:250px;">
 				</template>
 			</div>
 		</div>
