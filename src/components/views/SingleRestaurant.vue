@@ -128,8 +128,8 @@ export default {
 
 			<!-- restaurant dashboard -->
 			<div class="col-12 col-md-4 py-3">
-				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb" :alt="restaurant.name_restaurant"
-					class="card-img" style="width: 100%; height: auto;">
+				<img v-if="restaurant.thumb" :src="baseApiUrl + 'storage/' + restaurant.thumb"
+					:alt="restaurant.name_restaurant" class="card-img" style="width: 100%; height: auto;">
 				<img v-else src="https://placehold.co/300x200" :alt="restaurant.name_restaurant">
 			</div>
 			<div class="col-12 col-md-8 py-3">
@@ -165,9 +165,10 @@ export default {
 							<p class="text-secondary lh-sm dish_clamp"> {{ dish.description }}</p>
 						</div>
 						<div class="col-6 col-md-4 col-xxl-3 align-self-center p-1">
-							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
+							<img v-if="dish.image" :src="baseApiUrl + 'storage/' + dish.image"
+								:alt="restaurant.name_restaurant" class="card-img">
+							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant"
 								class="card-img">
-							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">
 						</div>
 						<!-- stato del carrello -->
 						<div class="col-12 d-flex gap-2 mb-1" id="dish_btn">

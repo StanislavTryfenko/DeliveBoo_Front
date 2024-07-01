@@ -63,7 +63,9 @@ export default {
 			<div class="row h-100">
 
 				<div class="col-12">
-					<strong v-if="localStorageCartRestaurantName">Stai ordinando da: {{ localStorageCartRestaurantName }}</strong>
+					<strong v-if="localStorageCartRestaurantName">
+						Stai ordinando da: {{ state.cartRestraurantName }}
+					</strong>
 
 					<table class="table">
 						<tbody>
