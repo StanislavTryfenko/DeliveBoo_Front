@@ -52,6 +52,7 @@ state.callApi = function () {
 	axios
 		.get(this.base_api + this.restaurants_api)
 		.then(response => {
+			console.log(response);
 			this.restaurants = response.data.restaurants;
 			this.types = response.data.types;
 			this.dishes = response.data.dishes;
